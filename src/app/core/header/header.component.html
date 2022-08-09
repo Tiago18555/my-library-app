@@ -1,26 +1,26 @@
 <header>
-	<!-- <p>
+
 	  <mat-toolbar color="primary" class="app-mat-toolbar">
-		<button mat-raised-button color="primary"  mat-icon-button>
+		<button mat-raised-button color="secondary"  mat-icon-button>
 		  <mat-icon>menu</mat-icon>
 		</button>
-		<span>My App</span>
+		<span>Bem vindo {{username | uppercase}}.</span>
 		<div class="right-edge-toolbar">
-		  <button  mat-raised-button color="primary(200)"  mat-icon-button>
-			<mat-icon>favorite</mat-icon>
-		  </button>
-		  <button  mat-raised-button color="primary"  mat-icon-button>
-			<mat-icon>share</mat-icon>
+		  <button  mat-raised-button color="secondary"  mat-icon-button (click)="logout()">
+			<mat-icon>exit_to_app</mat-icon>
 		  </button>
 		</div>
 	  </mat-toolbar>
-	</p>
+
+	  <div class="header-menu">
+		  <ul>
+			<li [routerLink]="['welcome']">INICIO</li>
+			<li [routerLink]="['students']">ALUNOS</li>
+			<li [routerLink]="['professors']">PROFESSORES</li>
+			<li [routerLink]="['books']">ACERVO</li>
+			<li [routerLink]="['history']">REGISTROS</li>
+		  </ul>
+	  </div>
   
-	<ul>
-	  <li [routerLink]="['']">HOME</li>
-	  <li [routerLink]="['second']">MK MOVES</li>
-	  <li [routerLink]="['third']">KPOP-API</li>
-	  <li [routerLink]="['forth']">DOG-API</li>
-	  <li [routerLink]="['fifth']">FOOD-API</li>
-	</ul> -->
-  </header>
+
+</header>

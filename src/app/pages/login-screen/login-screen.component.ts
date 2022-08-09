@@ -25,7 +25,7 @@ export class LoginScreenComponent implements OnInit {
 
   onSubmit() {
     this.service.authenticate(this.user).subscribe(data => {      
-      this.router.navigate(['/welcome']);        
+      this.router.navigate(['/home']);        
     });
   }
 }

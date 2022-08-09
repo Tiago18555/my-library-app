@@ -8,7 +8,7 @@ mat-card {
 	mat-card-content {
 		height: 20em;
 		width: 35em;
-		border: 2px solid #aa2fff;
+		border: 2px solid var(--800);;
 		border-radius: 10px;
 		padding: 1em;
 		form {
@@ -18,7 +18,7 @@ mat-card {
 			flex-direction: column;
 			justify-content: space-around;
 			mat-form-field {
-				border: 1px solid #aa2fff;
+				border: 1px solid var(--100);;
 				border-radius: 3px;
 				text-align: center;
 			}

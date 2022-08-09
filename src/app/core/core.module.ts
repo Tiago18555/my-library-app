@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { HomeRoutingModule } from '../pages/home/home-routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -14,8 +15,9 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
+    HomeRoutingModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent,

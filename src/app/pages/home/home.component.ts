@@ -4,21 +4,16 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 @Component({
   selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   public username : string = ''
 
   constructor(
-    private storage : LocalStorageService,
-    private service : MyLibraryApiService
+    private storage : LocalStorageService
   ) { }
-
-  logout() : void {
-    this.service.logout()
-  }
 
 
   ngOnInit(): void {
@@ -26,3 +21,4 @@ export class WelcomeComponent implements OnInit {
   }
 
 }
+

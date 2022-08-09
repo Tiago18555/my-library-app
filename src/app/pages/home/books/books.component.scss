@@ -1,0 +1,45 @@
+mat-card {
+	width: 80vw;
+	margin: auto;
+	min-height: 65vh;
+	height: fit-content;
+	background-color: var(--50);
+	border: 1px solid var(--200);
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		li {
+			width: 6em;
+			height: 1.2rem;
+			padding: auto;
+			text-align: center;
+			border: 1px solid black;
+
+			//Desabilitar SELEÇÃO DE TEXTO
+			user-select: none; /* supported by Chrome and Opera */
+			-webkit-user-select: none; /* Safari */
+			-khtml-user-select: none; /* Konqueror HTML */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently*/
+
+			mat-icon {
+				font-size: 1.2rem;
+			}
+			
+			&:hover {
+				filter:opacity(0.5);
+			}
+		}
+	}
+
+	table {
+		width: 100%;
+	}
+}

@@ -8,8 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginScreenModule } from './pages/login-screen/login-screen.module';
 import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
-import { CoreModule } from './core/core.module';
 import { AuthGuard } from './guards/auth-guard';
+import { HomeModule } from './pages/home/home.module';
 
 @NgModule({
   declarations: [
@@ -17,14 +17,16 @@ import { AuthGuard } from './guards/auth-guard';
   ],
   imports: [
     /* APP-MODULES  */
-    CoreModule,
     LoginScreenModule,
+    HomeModule,
+    
+    /* ROUTING-MODULES */
+    AppRoutingModule,
     
     /* ANGULAR-MODULES */
     AppMaterialModule,
     CommonModule,
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule
   ],
