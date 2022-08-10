@@ -11,7 +11,7 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 export class LoginScreenComponent implements OnInit {
 
   public user : AuthRequestModel = { 
-    username: 'user1', 
+    username: 'RestauraçãoDeMóveisEoCaramba', 
     password: '33643975' 
   };
 

@@ -3,6 +3,8 @@ mat-card {
 	margin: auto;
 	min-height: 65vh;
 	height: fit-content;
+
+	min-width: 960px;
 	background-color: var(--50);
 	border: 1px solid var(--200);
 
@@ -15,11 +17,10 @@ mat-card {
 		justify-content: space-between;
 
 		li {
-			width: 6em;
-			height: 1.2rem;
+			width: fit-content;
+			height: fit-content;
 			padding: auto;
 			text-align: center;
-			border: 1px solid black;
 
 			//Desabilitar SELEÇÃO DE TEXTO
 			user-select: none; /* supported by Chrome and Opera */
@@ -38,8 +39,33 @@ mat-card {
 			}
 		}
 	}
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
+
 
 	table {
 		width: 100%;
+
+		ng-container {
+			td, th {
+				display: flex!important;
+				justify-content: center!important;
+				align-items: center!important;
+			}
+		}
+
+		mat-card {
+		}
+
+
+		// :nth-child(4), :nth-child(2) {
+		// 	text-align: center;
+		// 	td {
+		// 		text-align: center;	
+		// 	}
+		//}
 	}
 }

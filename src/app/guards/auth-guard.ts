@@ -19,9 +19,9 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-    let token = this.localStorage.get('session').token;    
+    let token = this.localStorage.getString('session');    
     
-    if ( token === {} || token === undefined ){
+    if ( token === '' || token === undefined ){
       this.router.navigate(['/login']);
       console.log('token is undefined or null');
       

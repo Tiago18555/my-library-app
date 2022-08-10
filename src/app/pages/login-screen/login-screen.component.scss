@@ -5,15 +5,17 @@ mat-card {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 	mat-card-content {
-		height: 20em;
-		width: 35em;
+		height: fit-content;
+		width: fit-content;
 		border: 2px solid var(--800);;
 		border-radius: 10px;
 		padding: 1em;
+		
 		form {
-			height: inherit;
-			width: inherit;
+			height: 20em;
+			width: 35em;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
