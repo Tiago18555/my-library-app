@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -22,7 +23,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   exports: [
     MatTableModule,
@@ -33,7 +35,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ]
 })
 export class AppMaterialModule { }

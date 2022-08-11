@@ -4,7 +4,8 @@ mat-card {
 	min-height: 65vh;
 	height: fit-content;
 
-	min-width: 960px;
+	width: fit-content;
+	min-width: 1280px;
 	background-color: var(--50);
 	border: 1px solid var(--200);
 
@@ -42,6 +43,14 @@ mat-card {
 	form {
 		display: flex;
 		flex-direction: column;
+
+		mat-form-field {
+
+			textarea {
+				height: 10em;
+				resize: vertical;
+			}
+		}
 	}
 
 
@@ -56,16 +65,14 @@ mat-card {
 				align-items: center!important;
 			}
 		}
-
-		mat-card {
-		}
-
-
-		// :nth-child(4), :nth-child(2) {
-		// 	text-align: center;
-		// 	td {
-		// 		text-align: center;	
-		// 	}
-		//}
 	}
+}
+
+.form-card {
+	width: inherit;
+	height: inherit;
+}
+
+.col {
+	text-align: center;
 }
