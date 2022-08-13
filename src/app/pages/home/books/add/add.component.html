@@ -1,0 +1,63 @@
+<form action="post">
+
+	<mat-form-field>
+		<input 
+			matInput 
+			placeholder="Título" 
+			[(ngModel)]="formFields.titulo" 
+			name ="title"
+			(ngModelChange)="controlSubmit()"
+		>
+	</mat-form-field>
+
+	<mat-form-field>
+		<textarea 
+			matInput 
+			placeholder="Descrição" 
+			[(ngModel)]="formFields.descricao" 
+			name ="descricao"
+			(ngModelChange)="controlSubmit()"
+		></textarea>
+	</mat-form-field>
+
+	<mat-form-field *ngIf="authors$ | async as authors">
+		<mat-label>Autor</mat-label>
+		<mat-select [(value)]="formFields.autor" (selectionChange)="controlSubmit()">
+			<mat-option *ngFor="let author of authors.data" [value]="author.id">
+			{{author.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field *ngIf="publishers$ | async as publishers">
+		<mat-label>Editora</mat-label>
+		<mat-select [(value)]="formFields.editora" (selectionChange)="controlSubmit()">
+			<mat-option *ngFor="let publisher of publishers.data" [value]="publisher.id">
+			{{publisher.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input 
+			matInput 
+			placeholder="Quantidade" 
+			name ="availableAmount"
+			type = "number"
+			min = "1"
+			[(ngModel)]="formFields.quantidade" 
+			(ngModelChange)="controlSubmit()"
+		>
+	</mat-form-field>
+
+	<button 
+		mat-raised-button 
+		color="primary" 
+		type="submit" 
+		(click)="onSubmit()" 
+		[disabled]="this.disableSubmit"
+	>
+		Adicionar
+	</button>
+
+</form>

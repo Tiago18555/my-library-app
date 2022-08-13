@@ -34,7 +34,7 @@ interface BookModel {
 	autor: string;
 	editora: string;
 	quantidade: number;
-	descricao?: string;
+	descricao: string;
 }
 
 export { 

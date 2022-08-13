@@ -5,11 +5,12 @@ import { CoreModule } from 'src/app/core/core.module';
 import { StudentsComponent } from './students/students.component';
 import { ProfessorsComponent } from './professors/professors.component';
 import { HistoryComponent } from './history/history.component';
-import { BooksComponent } from './books/books.component';
 import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/shared/app-material/app-material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { BooksModule } from './books/books.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -19,7 +20,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
     StudentsComponent,
     ProfessorsComponent,
     HistoryComponent,
-    BooksComponent,
     WelcomeComponent
   ],
   imports: [
@@ -27,14 +27,15 @@ import { WelcomeComponent } from './welcome/welcome.component';
     CoreModule,
     FormsModule,
     AppMaterialModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    BooksModule,
+    BrowserModule
   ],
   exports: [
     HomeComponent,
     StudentsComponent,
     ProfessorsComponent,
     HistoryComponent,
-    BooksComponent,
     WelcomeComponent
   ]
 })

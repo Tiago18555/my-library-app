@@ -1,7 +1,7 @@
 <header>
 
 	  <mat-toolbar color="primary" class="app-mat-toolbar">
-		<button mat-raised-button color="secondary"  mat-icon-button>
+		<button mat-raised-button color="secondary"  mat-icon-button class="active">
 		  <mat-icon>menu</mat-icon>
 		</button>
 		<span>Bem vindo {{username | uppercase}}.</span>
@@ -17,7 +17,7 @@
 			<li [routerLink]="['welcome']">INICIO</li>
 			<li [routerLink]="['students']">ALUNOS</li>
 			<li [routerLink]="['professors']">PROFESSORES</li>
-			<li [routerLink]="['books']">ACERVO</li>
+			<li [routerLink]="['books/list']">ACERVO</li>
 			<li [routerLink]="['history']">REGISTROS</li>
 		  </ul>
 	  </div>
