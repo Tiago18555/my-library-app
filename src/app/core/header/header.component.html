@@ -14,13 +14,45 @@
 
 	  <div class="header-menu">
 		  <ul>
-			<li [routerLink]="['welcome']">INICIO</li>
-			<li [routerLink]="['students']">ALUNOS</li>
-			<li [routerLink]="['professors']">PROFESSORES</li>
-			<li [routerLink]="['books/list']">ACERVO</li>
-			<li [routerLink]="['history']">REGISTROS</li>
+			<li 
+				[ngClass]="{
+					'active' : InicioIsActive, 
+					'inactive' : !InicioIsActive
+				}" 
+				[routerLink]="['welcome']"
+			>INICIO</li>
+
+			<li
+				[ngClass]="{
+					'active' : AlunosIsActive,
+					'inactive' : !AlunosIsActive
+				}" 
+				[routerLink]="['students']"
+			>ALUNOS</li>
+
+			<li 
+				[ngClass]="{
+					'active' : ProfessoresIsActive,
+					'inactive' : !ProfessoresIsActive
+				}" 
+				[routerLink]="['professors']"
+			>PROFESSORES</li>
+			
+			<li 
+				[ngClass]="{
+					'active' : AcervoIsActive,
+					'inactive' : !AcervoIsActive
+				}"
+				[routerLink]="['books/list']"
+			>ACERVO</li>
+
+			<li 
+				[ngClass]="{
+					'active' : RegistroIsActive,
+					'inactive' : !RegistroIsActive
+				}" 
+				[routerLink]="['history']"
+			>REGISTROS</li>
 		  </ul>
 	  </div>
-  
-
 </header>

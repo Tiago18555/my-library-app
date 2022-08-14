@@ -67,7 +67,7 @@ const routes: Routes = [
         component: PublisherComponent
       },
       {
-        path: 'edit/:id',
+        path: 'edit/:title',
         component: EditComponent
       }
     ]

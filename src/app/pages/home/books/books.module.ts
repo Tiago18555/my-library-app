@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/shared/app-material/app-material.module';
 import { EditComponent } from './edit/edit.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { HomeRoutingModule } from '../home-routing.module';
 
 
 @NgModule({

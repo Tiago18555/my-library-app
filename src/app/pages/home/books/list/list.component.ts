@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { BookModel, BookResponseDataModel } from 'src/app/models/response-models/book';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
@@ -11,23 +12,12 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 })
 export class ListComponent implements OnInit {
 
-  public formFields : BookModel = {
-    titulo : '',
-    autor : '',
-    editora : '',
-    descricao : '',
-    quantidade : 1,
-  };
-
-  
-  public displayedColumns: string[] = ['titulo', 'autor', 'editora', 'quantidade', 'edit', 'remove']
-  public books: BookModel[] = []
+  public displayedColumns: string[] = ['titulo', 'autor', 'editora', 'quantidade', 'edit']
   public dataSource : any
-  public authors$ : Observable<any> = of([])
-  public publishers$ : Observable<any> = of([])
 
   constructor(
-    private service : MyLibraryApiService
+    private service : MyLibraryApiService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +28,12 @@ export class ListComponent implements OnInit {
     this.service.listAllBooks().subscribe(res =>
       this.dataSource = new BooksDataSource(res.data)
     );
+  }
+
+  edit(title: string) {
+    console.log(title);
+    
+    this.router.navigate(['/home/books/edit/',  title ]);
   }
 }
 

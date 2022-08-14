@@ -11,11 +11,17 @@ interface BookResponseModel {
 	token?: string;
 }
 
+interface BookResponseDataModelSingle {
+	httpstatus: string;
+	data: BookResponseDataModel;
+	token?: string;
+}
+
 interface BookResponseDataModel {
 	title: string;
 	authorName: string,
 	publisher: PublisherModel,
-	description?: string,
+	description: string,
 	availableAmount: number
 }
 
@@ -40,5 +46,6 @@ interface BookModel {
 export { 
 	BookResponseModel,
 	BookResponseDataModel,
-	BookModel
+	BookModel,
+	BookResponseDataModelSingle
 };

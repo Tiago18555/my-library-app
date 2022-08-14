@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-professors',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./professors.component.scss']
 })
 export class ProfessorsComponent implements OnInit {
+
+  @Output()
+  public activeLink : boolean = false;
 
   constructor() { }
 

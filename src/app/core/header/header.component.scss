@@ -40,15 +40,13 @@ header{
 			padding: 0;
 			margin: 0;
 
-			li{
+			li {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 				justify-content: center;
-				color: var(--900);
 				width: 10em;
 				height: 5em;
-				border-radius: 5px;
 				text-align: center;
 				vertical-align: middle;
 				margin: 0;
@@ -66,10 +64,7 @@ header{
 					cursor: pointer;
 				}
 
-				.active {
-					background-color: var(--500);
-				}
-			  
+				
 				&::after {
 					content:'';
 					width: 0%;
@@ -88,5 +83,12 @@ header{
 			}
 		}
 	}
-  
+	
+}
+.active {
+	background-color: var(--200);
+}
+
+.inactive {
+	background-color: var(--100);
 }

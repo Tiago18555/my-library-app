@@ -6,7 +6,8 @@
 					mat-raised-button 
 					color="secondary"  
 					mat-icon-button 
-					[routerLink]="['list']" 
+					[routerLink]="['list']"
+					[disabled]="ListIsActive"
 				>
 					<mat-icon>
 						book
@@ -20,6 +21,7 @@
 					color="secondary"  
 					mat-icon-button 
 					[routerLink]="['authors']"
+					[disabled]="AuthorsIsActive"
 				>
 					<mat-icon>
 						person
@@ -33,6 +35,7 @@
 					color="secondary"  
 					mat-icon-button 
 					[routerLink]="['publishers']"
+					[disabled]="PublishersIsActive"
 				>
 					<mat-icon>
 						account_balance
@@ -47,6 +50,7 @@
 					color="secondary" 
 					mat-icon-button 
 					[routerLink]="['add']"
+					[disabled]="AddIsActive"
 				>
 					<mat-icon>
 						add

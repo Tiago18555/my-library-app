@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { AuthRequestModel, ValidateRequestModel } from '../models/request-models/auth';
-import { BookPostModel } from '../models/request-models/book';
+import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
 import { AuthResponseModel, ValidateResponseModel } from '../models/response-models/auth';
 import { AuthorResponseModel } from '../models/response-models/author';
-import { BookResponseModel } from '../models/response-models/book';
+import { BookResponseDataModelSingle, BookResponseModel } from '../models/response-models/book';
 import { PublisherResponseModel } from '../models/response-models/publisher';
 import { LocalStorageService } from './local-storage.service';
 
@@ -104,13 +104,32 @@ export class MyLibraryApiService {
   }
 
   /**
-   * 
    * @param book 
    * @returns Observable<BookResponseModel>
    */
   addBook(book: BookPostModel) : Observable<BookResponseModel> {
     return this.HttpClient
       .post<BookResponseModel>( `${this.BASEURL}book/register`, book, this.header )
+      .pipe(first());
+  }
+
+  /**
+   * @param title 
+   * @returns Observable<BookResponseModel>
+   */
+  getBookByTitle(title: string) : Observable<BookResponseDataModelSingle> {
+    return this.HttpClient
+      .get<BookResponseDataModelSingle>( `${this.BASEURL}book/${title}`, this.header )
+      .pipe(first());
+  }
+
+  /**
+   * @param book
+   * @returns Observable<BookResponseModel>
+  */
+  updateBook(book: BookUpdateModel) : Observable<BookResponseModel> {
+    return this.HttpClient
+      .put<BookResponseModel>( `${this.BASEURL}book`, book, this.header )
       .pipe(first());
   }
 }

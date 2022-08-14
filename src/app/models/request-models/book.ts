@@ -15,6 +15,7 @@ interface BookPostModel {
  * @description Interface que representa a requisição para a API de atualização de livros
  */
 interface BookUpdateModel {
+	id: string,
 	author?: string,
 	availableAmount?: number,
 	description?: string,
