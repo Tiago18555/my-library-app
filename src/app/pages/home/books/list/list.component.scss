@@ -2,5 +2,11 @@ table {
 	width: 100%;
 	.col {
 		text-align: center;
+		mat-icon {
+			cursor: pointer;
+			&:hover {
+				color: red;
+			}
+		}
 	}
 }

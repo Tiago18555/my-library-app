@@ -4,5 +4,13 @@ table {
 		text-align: center;
 		margin: 0;
 		padding: 0;
+
+		mat-icon {
+			cursor: pointer;
+			
+			&:hover {
+				color: red;
+			}
+		}
 	}
 }

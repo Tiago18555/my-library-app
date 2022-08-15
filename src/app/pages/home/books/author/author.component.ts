@@ -12,7 +12,8 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 export class AuthorComponent implements OnInit {
 
   public displayedColumns: string[] = ['nome', 'edit']
-  public dataSource : any
+  public dataTableSource : any
+  public dataSource$ : Observable<any> = of([])
 
   constructor(
     private service : MyLibraryApiService
@@ -23,8 +24,9 @@ export class AuthorComponent implements OnInit {
   }
 
   loadAuthors() : void {
-    this.service.listAllAuthors().subscribe(res =>
-      this.dataSource = new AuthorsDataSource(res.data)
+    this.dataSource$ = this.service.listAllAuthors()
+    this.dataSource$.subscribe(res =>
+      this.dataTableSource = new AuthorsDataSource(res.data)
     );
   }
 }

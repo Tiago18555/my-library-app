@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { delay, first, tap } from 'rxjs/operators';
 import { AuthRequestModel, ValidateRequestModel } from '../models/request-models/auth';
 import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
 import { AuthResponseModel, ValidateResponseModel } from '../models/response-models/auth';
@@ -22,6 +22,11 @@ export class MyLibraryApiService {
     private localStorage: LocalStorageService,
     private router: Router
   ) { }
+
+  /**
+   * @summary: Debug
+   */
+  private readonly BASEDELAY = 100;
 
   /**
    * @summary: Host section
@@ -82,7 +87,7 @@ export class MyLibraryApiService {
   listAllBooks() : Observable<BookResponseModel> {        
     return this.HttpClient
       .get<BookResponseModel>( `${this.BASEURL}book`, this.header )
-      .pipe(first())
+      .pipe(delay(this.BASEDELAY), first())
   }
 
   /**
@@ -91,7 +96,7 @@ export class MyLibraryApiService {
   listAllAuthors() : Observable<AuthorResponseModel> {
     return this.HttpClient
       .get<AuthorResponseModel>( `${this.BASEURL}author`, this.header )
-      .pipe(first());
+      .pipe(delay(this.BASEDELAY), first());
   }
 
   /**
@@ -100,7 +105,7 @@ export class MyLibraryApiService {
   listAllPublishers() : Observable<PublisherResponseModel> {
     return this.HttpClient
       .get<PublisherResponseModel>( `${this.BASEURL}publisher`, this.header )
-      .pipe(first());
+      .pipe(delay(this.BASEDELAY), first());
   }
 
   /**
@@ -110,7 +115,7 @@ export class MyLibraryApiService {
   addBook(book: BookPostModel) : Observable<BookResponseModel> {
     return this.HttpClient
       .post<BookResponseModel>( `${this.BASEURL}book/register`, book, this.header )
-      .pipe(first());
+      .pipe(delay(this.BASEDELAY), first());
   }
 
   /**
@@ -120,7 +125,7 @@ export class MyLibraryApiService {
   getBookByTitle(title: string) : Observable<BookResponseDataModelSingle> {
     return this.HttpClient
       .get<BookResponseDataModelSingle>( `${this.BASEURL}book/${title}`, this.header )
-      .pipe(first());
+      .pipe(delay(this.BASEDELAY), first());
   }
 
   /**
@@ -130,6 +135,6 @@ export class MyLibraryApiService {
   updateBook(book: BookUpdateModel) : Observable<BookResponseModel> {
     return this.HttpClient
       .put<BookResponseModel>( `${this.BASEURL}book`, book, this.header )
-      .pipe(first());
+      .pipe(delay(this.BASEDELAY), first());
   }
 }

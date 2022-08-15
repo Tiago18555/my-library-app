@@ -24,7 +24,7 @@
 		<mat-label>Autor</mat-label>
 		<mat-select [(value)]="formFields.autor" (selectionChange)="controlSubmit()">
 			<mat-option *ngFor="let author of authors.data" [value]="author.id">
-			{{author.name}}
+				{{author.name}}
 			</mat-option>
 		</mat-select>
 	</mat-form-field>
@@ -33,7 +33,7 @@
 		<mat-label>Editora</mat-label>
 		<mat-select [(value)]="formFields.editora" (selectionChange)="controlSubmit()">
 			<mat-option *ngFor="let publisher of publishers.data" [value]="publisher.id">
-			{{publisher.name}}
+				{{publisher.name}}
 			</mat-option>
 		</mat-select>
 	</mat-form-field>

@@ -5,5 +5,11 @@ table {
 		margin: 0;
 		padding: 0;
 		width: 10em;
+		mat-icon {
+			cursor: pointer;
+			&:hover {
+				color: red;
+			}
+		}
 	}
 }

@@ -12,7 +12,8 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 export class PublisherComponent implements OnInit {
 
   public displayedColumns: string[] = ['nome', 'cnpj', 'edit']
-  public dataSource : any
+  public dataTableSource : any
+  public dataSource$ : Observable<any> = of([])
 
   constructor(
     private service : MyLibraryApiService
@@ -23,8 +24,9 @@ export class PublisherComponent implements OnInit {
   }
 
   loadPublishers() : void {
-    this.service.listAllPublishers().subscribe(res =>
-      this.dataSource = new PublishersDataSource(res.data)
+    this.dataSource$ = this.service.listAllPublishers()
+    this.dataSource$.subscribe(res =>
+      this.dataTableSource = new PublishersDataSource(res.data)
     );
   }
 }
