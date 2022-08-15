@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay, first, tap } from 'rxjs/operators';
 import { AuthRequestModel, ValidateRequestModel } from '../models/request-models/auth';
 import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
@@ -10,6 +10,11 @@ import { AuthorResponseModel } from '../models/response-models/author';
 import { BookResponseDataModelSingle, BookResponseModel } from '../models/response-models/book';
 import { PublisherResponseModel } from '../models/response-models/publisher';
 import { LocalStorageService } from './local-storage.service';
+
+export interface Student {
+  name: string;
+  cpf: string;
+}
 
 
 @Injectable({
@@ -137,4 +142,39 @@ export class MyLibraryApiService {
       .put<BookResponseModel>( `${this.BASEURL}book`, book, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
+
+  loadStudents() : Observable<Student[]> {
+    return of(this.students)
+  }
+
+
+  public students : Student[] = [
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
+    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
+    { name: 'José das Neves Nascimento', cpf: '123456789' },
+    { name: 'João das Neves Nascimento', cpf: '123456789' },
+  ];
 }
+   
+

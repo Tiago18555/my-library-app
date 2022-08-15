@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSliderModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   exports: [
     MatTableModule,
@@ -39,7 +40,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSliderModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ]
 })
 export class AppMaterialModule { }
