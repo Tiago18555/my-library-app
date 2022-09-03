@@ -3,11 +3,19 @@
  * @interface BookResponseModel
  * @interface BookResponseDataModel
  * @interface PublisherModel
+ * @interface UnitResponseDataModel
+ * @interface UnitResponseModel
  * @description Interface que representa a resposta da API para a listagem de livros
  */
 interface BookResponseModel {
 	httpstatus: string;
 	data: BookResponseDataModel[];
+	token?: string;
+}
+
+interface UnitResponseModel {
+	httpstatus: string;
+	data: UnitResponseDataModel[];
 	token?: string;
 }
 
@@ -23,6 +31,10 @@ interface BookResponseDataModel {
 	publisher: PublisherModel,
 	description: string,
 	availableAmount: number
+}
+
+interface UnitResponseDataModel {
+	ibsn: number;
 }
 
 interface PublisherModel {
@@ -47,5 +59,7 @@ export {
 	BookResponseModel,
 	BookResponseDataModel,
 	BookModel,
-	BookResponseDataModelSingle
+	BookResponseDataModelSingle,
+	UnitResponseModel,
+	UnitResponseDataModel
 };

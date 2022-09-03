@@ -7,8 +7,9 @@ import { AuthRequestModel, ValidateRequestModel } from '../models/request-models
 import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
 import { AuthResponseModel, ValidateResponseModel } from '../models/response-models/auth';
 import { AuthorResponseModel } from '../models/response-models/author';
-import { BookResponseDataModelSingle, BookResponseModel } from '../models/response-models/book';
+import { BookResponseDataModelSingle, BookResponseModel, UnitResponseModel } from '../models/response-models/book';
 import { PublisherResponseModel } from '../models/response-models/publisher';
+import { StudentResponseModel } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
 
 export interface Student {
@@ -53,6 +54,10 @@ export class MyLibraryApiService {
   }
 
   /**
+   * @summary: Auth endpoint
+   */
+
+  /**
    * @param authModel 
    * @returns Observable<AuthResponseModel>
    */
@@ -84,6 +89,10 @@ export class MyLibraryApiService {
       first()
     );
   }
+
+  /**
+   * @summary: Book endpoint
+   */
   
 
   /**
@@ -110,6 +119,15 @@ export class MyLibraryApiService {
   listAllPublishers() : Observable<PublisherResponseModel> {
     return this.HttpClient
       .get<PublisherResponseModel>( `${this.BASEURL}publisher`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  /**
+   * @returns Observable<UnitResponseModel>
+   */
+  listAllIbsnsByBook(id: String): Observable<UnitResponseModel> {
+    return this.HttpClient
+      .get<UnitResponseModel>( `${this.BASEURL}book/ibsn/${id}`, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 
@@ -143,38 +161,12 @@ export class MyLibraryApiService {
       .pipe(delay(this.BASEDELAY), first());
   }
 
-  loadStudents() : Observable<Student[]> {
-    return of(this.students)
+  /**
+   * @returns Observable<StudentResponseModel>
+   */
+  loadStudents() : Observable<StudentResponseModel> {
+    return this.HttpClient
+      .get<StudentResponseModel>( `${this.BASEURL}student`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
   }
-
-
-  public students : Student[] = [
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-    { name: 'Maria das Neves Nascimento', cpf: '123456789' },
-    { name: 'Pedro das Neves Nascimento', cpf: '123456789' },
-    { name: 'José das Neves Nascimento', cpf: '123456789' },
-    { name: 'João das Neves Nascimento', cpf: '123456789' },
-  ];
 }
-   
-

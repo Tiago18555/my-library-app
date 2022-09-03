@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
   loadStudents() : void {
     this.dataSource$ = this.service.loadStudents()
     this.dataSource$.subscribe(res =>
-      this.dataTableSource = new StudentsDataSource(res)
+      this.dataTableSource = new StudentsDataSource(res.data)
     );
   }
 

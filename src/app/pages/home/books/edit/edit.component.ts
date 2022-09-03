@@ -37,10 +37,13 @@ export class EditComponent implements OnInit {
   public authors$ : Observable<any> = of([])
   public publishers$ : Observable<any> = of([])
   public formFields$ : Observable<any> = of([])
+  public units$ : Observable<any> = of([])
 
   public authorSelected : SelectOutput = { name: '', id: '' }
   public publisherSelected : SelectOutput = { name: '', id: '' }
   public bookSelected : string = '';
+
+  public bookId : string = '';
 
   ngOnInit() {
     this.editBook()
@@ -175,8 +178,8 @@ export class EditComponent implements OnInit {
       this.authorSelected = { name: response.data.authorName, id: '' }
       this.publisherSelected = { name: response.data.publisher.publisherName, id: '' }
       this.bookSelected = response.data.id
-      console.log(response);
-      
+      console.log(response);      
+      this.units$ = this.service.listAllIbsnsByBook(this.bookSelected)
     })
   }
 }

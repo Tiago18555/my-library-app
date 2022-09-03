@@ -11,3 +11,23 @@ form {
 		}
 	}
 }
+
+.inner-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	.form-wrapper {
+		flex: 1;
+	}
+	.select-wrapper {
+		width: 5em;
+		mat-list {
+			mat-list-item {
+				text-align: center;
+				&:hover{
+					background-color: #f5f5f5;
+				}
+			}
+		}
+	}
+}

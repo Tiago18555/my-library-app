@@ -1,66 +1,82 @@
-<div *ngIf="formFields$ | async as formFields; else loading">
-	<form action="post" #itemForm="ngForm">
-	
-		<mat-form-field *ngIf="formFields$ | async as formFields">
-			<input 
-				matInput
-				placeholder="Título" 
-				[(ngModel)]="formFields.data.title" 
-				name ="title"
-				(ngModelChange)="controlSubmit(formFields.data)"
+<div class="inner-container">
+	<div *ngIf="formFields$ | async as formFields; else loading" class="form-wrapper">
+		<form action="post" #itemForm="ngForm">
+		
+			<mat-form-field *ngIf="formFields$ | async as formFields">
+				<input 
+					matInput
+					placeholder="Título" 
+					[(ngModel)]="formFields.data.title" 
+					name ="title"
+					(ngModelChange)="controlSubmit(formFields.data)"
+				>
+			</mat-form-field>
+		
+			<mat-form-field *ngIf="formFields$ | async as formFields">
+				<textarea 
+					matInput 
+					placeholder="Descrição" 
+					[(ngModel)]="formFields.data.description" 
+					name ="descricao"
+					(ngModelChange)="controlSubmit(formFields.data)"
+				></textarea>
+			</mat-form-field>
+		
+			<mat-form-field *ngIf="authors$ | async as authors">
+				<mat-label>{{authorSelected.name}}</mat-label>
+				<mat-select [value]="authorSelected" matNativeControl required #authorSelect (selectionChange)="setAuthor(authorSelect)">
+					<mat-option *ngFor="let author of authors.data" [value]="author">
+						{{author.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		
+			<mat-form-field *ngIf="publishers$ | async as publishers">
+				<mat-label>{{publisherSelected.name}}</mat-label>
+				<mat-select [value]="publisherSelected" matNativeControl required #publisherSelect (selectionChange)="setPublisher(publisherSelect)">
+					<mat-option *ngFor="let publisher of publishers.data" [value]="publisher">
+						{{publisher.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		
+			<mat-form-field *ngIf="formFields$ | async as formFields">
+				<input 
+					matInput 
+					placeholder="Quantidade" 
+					name ="formFielavailableAmount"
+					type = "number"
+					min = "1"
+					readonly = true
+					[(ngModel)]="formFields.data.availableAmount" 
+					(ngModelChange)="controlSubmit(formFields.data)"
+				>
+			</mat-form-field>
+		
+			<button 
+				mat-raised-button 
+				color="primary" 
+				type="submit" 
+				(click)="onSubmit(itemForm)" 
+				[disabled]="this.disableSubmit"
 			>
-		</mat-form-field>
-	
-		<mat-form-field *ngIf="formFields$ | async as formFields">
-			<textarea 
-				matInput 
-				placeholder="Descrição" 
-				[(ngModel)]="formFields.data.description" 
-				name ="descricao"
-				(ngModelChange)="controlSubmit(formFields.data)"
-			></textarea>
-		</mat-form-field>
-	
-		<mat-form-field *ngIf="authors$ | async as authors">
-			<mat-label>{{authorSelected.name}}</mat-label>
-			<mat-select [value]="authorSelected" matNativeControl required #authorSelect (selectionChange)="setAuthor(authorSelect)">
-				<mat-option *ngFor="let author of authors.data" [value]="author">
-					{{author.name}}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-	
-		<mat-form-field *ngIf="publishers$ | async as publishers">
-			<mat-label>{{publisherSelected.name}}</mat-label>
-			<mat-select [value]="publisherSelected" matNativeControl required #publisherSelect (selectionChange)="setPublisher(publisherSelect)">
-				<mat-option *ngFor="let publisher of publishers.data" [value]="publisher">
-					{{publisher.name}}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-	
-		<mat-form-field *ngIf="formFields$ | async as formFields">
-			<input 
-				matInput 
-				placeholder="Quantidade" 
-				name ="formFielavailableAmount"
-				type = "number"
-				min = "1"
-				[(ngModel)]="formFields.data.availableAmount" 
-				(ngModelChange)="controlSubmit(formFields.data)"
-			>
-		</mat-form-field>
-	
-		<button 
-			mat-raised-button 
-			color="primary" 
-			type="submit" 
-			(click)="onSubmit(itemForm)" 
-			[disabled]="this.disableSubmit"
-		>
-			Salvar modificações
-		</button>
-	</form>
+				Salvar modificações
+			</button>
+		</form>
+	</div>
+	<div *ngIf="units$ | async as units; else loading" class="select-wrapper">
+		<mat-list>
+			<mat-list-item>
+				<strong>
+					UNID.					
+				</strong>
+			</mat-list-item>
+			<mat-list-item *ngFor="let unit of units.data" >
+				{{unit.ibsn}}
+			</mat-list-item>
+		</mat-list>
+	</div>
+
 </div>
 
 <ng-template class="container" #loading>
