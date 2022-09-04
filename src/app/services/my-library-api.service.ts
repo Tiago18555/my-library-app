@@ -8,14 +8,10 @@ import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
 import { AuthResponseModel, ValidateResponseModel } from '../models/response-models/auth';
 import { AuthorResponseModel } from '../models/response-models/author';
 import { BookResponseDataModelSingle, BookResponseModel, UnitResponseModel } from '../models/response-models/book';
+import { BorrowingResponseModel } from '../models/response-models/borrowing';
 import { PublisherResponseModel } from '../models/response-models/publisher';
 import { StudentResponseModel } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
-
-export interface Student {
-  name: string;
-  cpf: string;
-}
 
 
 @Injectable({
@@ -167,6 +163,15 @@ export class MyLibraryApiService {
   loadStudents() : Observable<StudentResponseModel> {
     return this.HttpClient
       .get<StudentResponseModel>( `${this.BASEURL}student`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  /**
+   * @returns Observable<>
+   */
+  loadNextWeekBorrows() : Observable<BorrowingResponseModel> {
+    return this.HttpClient
+      .get<BorrowingResponseModel>( `${this.BASEURL}borrowing?filter=nextweek`, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 }

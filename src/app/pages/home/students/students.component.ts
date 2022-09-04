@@ -2,7 +2,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { MyLibraryApiService, Student } from 'src/app/services/my-library-api.service';
+import { Student } from 'src/app/models/response-models/student';
+import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 
 @Component({

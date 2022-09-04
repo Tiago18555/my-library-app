@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
@@ -42,6 +42,7 @@ export class EditComponent implements OnInit {
   public authorSelected : SelectOutput = { name: '', id: '' }
   public publisherSelected : SelectOutput = { name: '', id: '' }
   public bookSelected : string = '';
+  public unitIsSelected : boolean = false;
 
   public bookId : string = '';
 
@@ -54,16 +55,14 @@ export class EditComponent implements OnInit {
    */
   controlSubmit(input : BookResponseDataModel) : void {
     
-    if(this.fieldsAreValid(input))
-      {
-        this.disableSubmit = false
-      } else {
-        this.disableSubmit = true
-      }
+    if(this.fieldsAreValid(input)) {
+      this.disableSubmit = false
+    } else {
+      this.disableSubmit = true
+    }
   }
   
-  public fieldsAreValid(input : BookResponseDataModel) : boolean { 
-    
+  public fieldsAreValid(input : BookResponseDataModel) : boolean {   
 
     return (
       input.title.length >= this.MINIMUM_TITLE_FIELD_SIZE &&
@@ -182,4 +181,18 @@ export class EditComponent implements OnInit {
       this.units$ = this.service.listAllIbsnsByBook(this.bookSelected)
     })
   }
+
+  selectUnit(e: any) : void {
+    //console.log(e);    
+    this.unitIsSelected = !this.unitIsSelected
+  }
+
+  getIndex(index: any) {
+    //console.log(index);
+    console.log(this.index)
+    
+  }
+
+  @ViewChild('index')
+  public index : any;
 }

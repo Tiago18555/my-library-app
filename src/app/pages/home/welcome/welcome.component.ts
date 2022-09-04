@@ -1,4 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { BorrowingResponseDataModel, NextWeekBorrowingsDisplayModel } from 'src/app/models/response-models/borrowing';
+import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,12 +12,44 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  @Output()
-  public activeLink : boolean = false;
+  public displayedColumns: string[] = ['nome', 'livro', 'prazo']
+  public dataTableSource : any
+  public dataSource$ : Observable<any> = of([])
 
-  constructor() { }
+  constructor(
+    private service : MyLibraryApiService,
+    private router : Router
+  ) { }
 
   ngOnInit(): void {
+    this.loadBorrowings();
   }
 
+  loadBorrowings() : void {
+    this.dataSource$ = this.service.loadNextWeekBorrows()
+    this.dataSource$.subscribe(res => {
+      this.dataTableSource = new BorrowingsDataSource(res.data),
+      console.log(res);
+    });
+  }
+
+  viewDetails(row: any) : void {
+    console.log(row);  
+    ///TODO: implementar rota para detalhes do aluno  
+    ///this.router.navigate(['/students/' + row.id]);
+  }
+
+}
+
+class BorrowingsDataSource extends DataSource<any> {
+
+  constructor(private source : BorrowingResponseDataModel[]) {
+    super();
+  }
+
+  connect(): Observable<BorrowingResponseDataModel[]> {
+    return of(this.source);
+  }
+
+  disconnect(): void {}
 }

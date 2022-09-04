@@ -64,16 +64,26 @@
 			</button>
 		</form>
 	</div>
-	<div *ngIf="units$ | async as units; else loading" class="select-wrapper">
+	<div *ngIf="units$ | async as units" class="select-wrapper">
 		<mat-list>
+
 			<mat-list-item>
 				<strong>
 					UNID.					
 				</strong>
 			</mat-list-item>
-			<mat-list-item *ngFor="let unit of units.data" >
+
+			<mat-list-item 
+				*ngFor="let unit of units.data; let i = index;"
+				(click)="selectUnit(unit.ibsn)"
+				[ngClass]="{
+					'selected' : unitIsSelected,
+					'unselected' : !unitIsSelected
+				}"
+			>
 				{{unit.ibsn}}
 			</mat-list-item>
+
 		</mat-list>
 	</div>
 

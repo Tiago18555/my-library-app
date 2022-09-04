@@ -10,7 +10,13 @@ interface StudentResponseDataModel {
 	cnpj?: string;
 }
 
+interface Student {
+	name: string;
+	cpf: string;
+}
+
 export {
+	Student,
 	StudentResponseModel,
 	StudentResponseDataModel
 }
