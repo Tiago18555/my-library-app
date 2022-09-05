@@ -1,9 +1,4 @@
-import { DataSource } from '@angular/cdk/collections';
-import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Student } from 'src/app/models/response-models/student';
-import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -13,42 +8,8 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 })
 export class StudentsComponent implements OnInit {
 
-  public displayedColumns: string[] = ['cpf', 'nome']
-  public dataTableSource : any
-  public dataSource$ : Observable<any> = of([])
+  constructor() { }
 
-  constructor(
-    private service : MyLibraryApiService,
-    private router : Router
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.loadStudents()
-  }
-
-  loadStudents() : void {
-    this.dataSource$ = this.service.loadStudents()
-    this.dataSource$.subscribe(res =>
-      this.dataTableSource = new StudentsDataSource(res.data)
-    );
-  }
-
-  viewDetails(row: Student) : void {
-    console.log(row);  
-    ///TODO: implementar rota para detalhes do aluno  
-    ///this.router.navigate(['/students/' + row.id]);
-  }
-}
-
-class StudentsDataSource extends DataSource<any> {
-
-  constructor(private source : Student[]) {
-    super();
-  }
-
-  connect(): Observable<Student[]> {
-    return of(this.source);
-  }
-
-  disconnect(): void {}
 }

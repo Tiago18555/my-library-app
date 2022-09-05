@@ -10,7 +10,7 @@ import { AuthorResponseModel } from '../models/response-models/author';
 import { BookResponseDataModelSingle, BookResponseModel, UnitResponseModel } from '../models/response-models/book';
 import { BorrowingResponseModel } from '../models/response-models/borrowing';
 import { PublisherResponseModel } from '../models/response-models/publisher';
-import { StudentResponseModel } from '../models/response-models/student';
+import { StudentResponseModel, StudentResponseModelSingle } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
 
 
@@ -164,6 +164,12 @@ export class MyLibraryApiService {
     return this.HttpClient
       .get<StudentResponseModel>( `${this.BASEURL}student`, this.header )
       .pipe(delay(this.BASEDELAY), first());
+  }
+
+  getStudentByCpf(cpf: string) : Observable<StudentResponseModelSingle> {
+    return this.HttpClient
+    .get<StudentResponseModelSingle>( `${this.BASEURL}student/${cpf}`, this.header )
+    .pipe(delay(this.BASEDELAY), first());
   }
 
   /**

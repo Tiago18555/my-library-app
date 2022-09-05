@@ -1,6 +1,15 @@
+import { BookResponseDataModel } from "./book";
+import { BorrowingResponseDataModel } from "./borrowing";
+
 interface StudentResponseModel {
 	httpstatus: string;
 	data: StudentResponseDataModel[];
+	token?: string;
+}
+
+interface StudentResponseModelSingle {
+	httpstatus: string;
+	data: StudentResponseDataModel;
 	token?: string;
 }
 
@@ -8,6 +17,9 @@ interface StudentResponseDataModel {
 	id: string;
 	name: string;
 	cnpj?: string;
+	loan?: number;
+	books?: BookResponseDataModel[];
+	borrowings?: BorrowingResponseDataModel[];
 }
 
 interface Student {
@@ -18,5 +30,6 @@ interface Student {
 export {
 	Student,
 	StudentResponseModel,
-	StudentResponseDataModel
+	StudentResponseDataModel,
+	StudentResponseModelSingle
 }

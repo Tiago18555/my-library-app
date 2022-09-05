@@ -5,6 +5,8 @@ import { BooksComponent } from './books/books.component';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home.component';
 import { ProfessorsComponent } from './professors/professors.component';
+import { DetailsComponent } from './students/details/details.component';
+import { ListComponent } from './students/list/list.component';
 import { StudentsComponent } from './students/students.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -25,7 +27,22 @@ const routes: Routes = [
 		},
 		{ 
 			path: 'students', 
-			component: StudentsComponent 
+			component: StudentsComponent,
+			children: [
+				{
+				  path: '',
+				  redirectTo: 'list',
+				  pathMatch: 'full'
+				},
+				{
+				  path: 'list',
+				  component: ListComponent
+				},
+				{
+				  path: 'details/:id',
+				  component: DetailsComponent
+				}
+			  ]
 		},
 		{ 
 			path: 'professors', 

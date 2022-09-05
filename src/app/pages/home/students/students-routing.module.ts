@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth-guard';
+import { BooksComponent } from '../books/books.component';
 import { HistoryComponent } from '../history/history.component';
 import { HomeComponent } from '../home.component';
 import { ProfessorsComponent } from '../professors/professors.component';
-import { StudentsComponent } from '../students/students.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
-import { AddComponent } from './add/add.component';
-import { AuthorComponent } from './author/author.component';
-import { BooksComponent } from './books.component';
-import { EditComponent } from './edit/edit.component';
+import { DetailsComponent } from './details/details.component';
 import { ListComponent } from './list/list.component';
-import { PublisherComponent } from './publisher/publisher.component';
-
+import { StudentsComponent } from './students.component';
 
 const routes: Routes = [
   { 
@@ -27,23 +23,11 @@ const routes: Routes = [
       },
       { 
         path: 'welcome', 
-        component: WelcomeComponent 
+        component: WelcomeComponent
       },
       { 
         path: 'students', 
-        component: StudentsComponent
-      },
-      { 
-        path: 'professors', 
-        component: ProfessorsComponent
-      },
-      { 
-        path: 'history', 
-        component: HistoryComponent
-      },
-      { 
-        path: 'books', 
-        component: BooksComponent,
+        component: StudentsComponent,
         children: [
           {
             path: '',
@@ -55,22 +39,22 @@ const routes: Routes = [
             component: ListComponent
           },
           {
-            path: 'add',
-            component: AddComponent
-          },
-          {
-            path: 'authors',
-            component: AuthorComponent
-          },
-          {
-            path: 'publishers',
-            component: PublisherComponent
-          },
-          {
-            path: 'edit/:title',
-            component: EditComponent
+            path: 'details/:id',
+            component: DetailsComponent
           }
         ]
+      },
+      { 
+        path: 'professors', 
+        component: ProfessorsComponent
+      },
+      { 
+        path: 'history', 
+        component: HistoryComponent
+      },
+      { 
+        path: 'books', 
+        component: BooksComponent
       }
     ] 
   }
@@ -80,4 +64,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BooksRoutingModule { }
+export class StudentsRoutingModule { }

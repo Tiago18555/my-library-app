@@ -1,4 +1,31 @@
 <mat-card class="responsive-container">
-	<h1>HISTORY WORKS</h1>
-</mat-card>
+	<div class="sub-menu">
+		<ul>
+			<li>
+				<button 
+					mat-raised-button 
+					color="secondary"  
+					[routerLink]="['unfinished']"
+					[disabled]="unfinishedIsActive"
+				>
+					EMPRÉSTIMOS
+				</button>
+				<div class="line"></div>
+			</li>
+			<li>
+				<button 
+					mat-raised-button 
+					color="secondary"   
+					[routerLink]="['finished']"
+					[disabled]="finishedIsActive"
+				>
+					DEVOLUÇÕES
+				</button>
+				<div class="line"></div>
+			</li>
+		</ul>
+	</div>
 
+	<router-outlet></router-outlet>
+
+</mat-card>

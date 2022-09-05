@@ -11,15 +11,16 @@ import { HomeRoutingModule } from './home-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { BooksModule } from './books/books.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { DetailsComponent } from './students/details/details.component';
+import { StudentsModule } from './students/students.module';
+import { HistoryModule } from './history/history.module';
 
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    StudentsComponent,
     ProfessorsComponent,
-    HistoryComponent,
     WelcomeComponent
   ],
   imports: [
@@ -29,13 +30,13 @@ import { BrowserModule } from '@angular/platform-browser';
     AppMaterialModule,
     HomeRoutingModule,
     BooksModule,
+    StudentsModule,
+    HistoryModule,
     BrowserModule
   ],
   exports: [
     HomeComponent,
-    StudentsComponent,
     ProfessorsComponent,
-    HistoryComponent,
     WelcomeComponent
   ]
 })

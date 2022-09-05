@@ -2,7 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { BorrowingResponseDataModel, NextWeekBorrowingsDisplayModel } from 'src/app/models/response-models/borrowing';
+import { BorrowingResponseDataModel } from 'src/app/models/response-models/borrowing';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class WelcomeComponent implements OnInit {
   viewDetails(row: any) : void {
     console.log(row);  
     ///TODO: implementar rota para detalhes do aluno  
-    ///this.router.navigate(['/students/' + row.id]);
+    this.router.navigate(['home/students/details/' + row.client.cpf]);
   }
 
 }
