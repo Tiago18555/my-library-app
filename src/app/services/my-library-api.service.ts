@@ -180,4 +180,22 @@ export class MyLibraryApiService {
       .get<BorrowingResponseModel>( `${this.BASEURL}borrowing?filter=nextweek`, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
+
+  /**
+   * @returns Observable<BorrowingResponseModel>
+   */
+  loadFinishedBorrows() : Observable<BorrowingResponseModel> {
+    return this.HttpClient
+      .get<BorrowingResponseModel>( `${this.BASEURL}borrowing?filter=finished`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  /**
+   * @returns ObservableBorrowingResponseModel<>
+   */
+  loadUnfinishedBorrows() : Observable<BorrowingResponseModel> {
+    return this.HttpClient
+      .get<BorrowingResponseModel>( `${this.BASEURL}borrowing?filter=unfinished`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
 }

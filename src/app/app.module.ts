@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { AuthGuard } from './guards/auth-guard';
 import { HomeModule } from './pages/home/home.module';
+import { CalcLoanPipe } from './shared/pipes/calc-loan.pipe';
 
 @NgModule({
   declarations: [

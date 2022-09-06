@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/shared/app-material/app-material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HistoryComponent } from './history.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HistoryComponent } from './history.component';
     CoreModule,
     FormsModule,
     AppMaterialModule,
-    BrowserModule
+    BrowserModule,
+    PipesModule
   ],
   exports: [
     FinishedComponent,

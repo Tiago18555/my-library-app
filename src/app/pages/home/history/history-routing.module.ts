@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth-guard';
 import { BooksComponent } from '../books/books.component';
+import { EditComponent } from '../books/edit/edit.component';
 import { HomeComponent } from '../home.component';
 import { ProfessorsComponent } from '../professors/professors.component';
+import { DetailsComponent } from '../students/details/details.component';
 import { StudentsComponent } from '../students/students.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { FinishedComponent } from './finished/finished.component';
@@ -27,7 +29,13 @@ const routes: Routes = [
       },
       { 
         path: 'students', 
-        component: StudentsComponent
+        component: StudentsComponent,
+        children: [
+          {
+            path: 'details/:id',
+            component: DetailsComponent
+          }
+        ]
       },
       { 
         path: 'professors', 
@@ -54,7 +62,13 @@ const routes: Routes = [
       },
       { 
         path: 'books', 
-        component: BooksComponent
+        component: BooksComponent,
+        children: [
+          {
+            path: 'edit/:title',
+            component: EditComponent
+          }
+        ]
       }
     ] 
   }
