@@ -16,7 +16,7 @@ interface StudentResponseModelSingle {
 interface StudentResponseDataModel {
 	id: string;
 	name: string;
-	cnpj?: string;
+	cpf?: string;
 	loan?: number;
 	books?: BookResponseDataModel[];
 	borrowings?: BorrowingResponseDataModel[];

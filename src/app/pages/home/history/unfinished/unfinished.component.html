@@ -23,21 +23,30 @@
 	
 		<ng-container matColumnDef="emprestimo">
 			<th class="col" mat-header-cell *matHeaderCellDef>Data do empréstimo</th>
-			<td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date}}</td>
+			<td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date:'mediumDate':'':'pt-BR'}}</td>
 		</ng-container>
 
-		<ng-container matColumnDef="devolucao">
-			<th class="col" mat-header-cell *matHeaderCellDef>Data da devolução</th>
-			<td class="col" mat-cell *matCellDef="let element">{{element.endsAt | date}}</td>
+		<ng-container matColumnDef="prazo">
+			<th class="col" mat-header-cell *matHeaderCellDef>Prazo</th>
+			<td class="col" mat-cell *matCellDef="let element">{{element.deadLine | date:'mediumDate':'':'pt-BR'}}</td>
 		</ng-container>
 
 		<ng-container matColumnDef="multa">
 			<th class="col" mat-header-cell *matHeaderCellDef>Multa</th>
-			<td class="col" mat-cell *matCellDef="let element">{{element | calcLoan}}</td>
+			<td 
+                class="col" 
+                mat-cell 
+                *matCellDef="let element"
+            >{{element | calcLoan}}</td>
 		</ng-container>
 		
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		<tr 
+            mat-row 
+            *matRowDef="let row; columns: displayedColumns;"                 
+            #loan 
+            (click)="seeLoan(loan)"
+        ></tr>
 	</table>
 </div>
 
@@ -48,60 +57,8 @@
 </ng-template>
 
 <!--
-	{
-    "httpstatus": "OK",
-    "data": [
-        {
-            "id": "726e6360-33ce-4edd-8351-b6a1cc8fbe68",
-            "startsAt": "2022-09-03",
-            "endsAt": null,
-            "deadLine": "2022-09-08",
-            "unit": {
-                "ibsn": 450,
-                "book": {
-                    "id": "06fa397a-0e6b-4308-b446-d1a4d2e4341a",
-                    "title": "A Tormenta das Espadas",
-                    "author": {
-                        "id": "0ed8cc94-b28e-40d0-adb4-0866e2eac4cd",
-                        "name": "Agatha Christie"
-                    },
-                    "publisher": {
-                        "id": "6f54ce92-9a45-417c-a876-78f8a56b9e59",
-                        "name": "Editora Intrínseca",
-                        "cnpj": "56896219000175"
-                    },
-                    "description": "",
-                    "borrowing": null,
-                    "availableAmount": 9,
-                    "units": []
-                },
-                "client": {
-                    "id": "dc7b56a7-b7ee-40b1-a7b7-c990b2ad2e39",
-                    "name": "Julieta Sousa Fernandes",
-                    "cpf": "624.272.180-57",
-                    "isProfessor": false,
-                    "loan": 300.0,
-                    "books": [],
-                    "borrowings": [],
-                    "isInactive": false
-                }
-            },
-            "client": {
-                "id": "dc7b56a7-b7ee-40b1-a7b7-c990b2ad2e39",
-                "name": "Julieta Sousa Fernandes",
-                "cpf": "624.272.180-57",
-                "isProfessor": false,
-                "loan": 300.0,
-                "books": [],
-                "borrowings": [],
-                "isInactive": false
-            },
-            "configuration": {
-                "startedAt": "2022-08-18T00:34:34.256+00:00",
-                "tolerance": 5,
-                "assessment": 20.0
-            }
-        }
-    ]
-}
+                [ngClass]="{
+                'red-col' : loan.tbody.innerHTML != 'isento',
+                'green-col' : loan.tbody.innerHTML == 'isento'
+            }"
 -->

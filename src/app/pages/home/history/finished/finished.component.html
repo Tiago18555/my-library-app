@@ -23,12 +23,12 @@
 	
 		<ng-container matColumnDef="emprestimo">
 			<th class="col" mat-header-cell *matHeaderCellDef>Data do empréstimo</th>
-			<td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date}}</td>
+			<td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date:'mediumDate':'':'pt-BR'}}</td>
 		</ng-container>
 
 		<ng-container matColumnDef="devolucao">
 			<th class="col" mat-header-cell *matHeaderCellDef>Data da devolução</th>
-			<td class="col" mat-cell *matCellDef="let element">{{element.endsAt | date}}</td>
+			<td class="col" mat-cell *matCellDef="let element">{{element.endsAt | date:'mediumDate':'':'pt-BR'}}</td>
 		</ng-container>
 
 		<ng-container matColumnDef="multa">
@@ -46,42 +46,3 @@
 		<mat-spinner></mat-spinner>
 	</div>
 </ng-template>
-
-<!--
-{id: 'c435701a-4949-4104-bd22-a53adf64b1b7', startsAt: '2022-09-03', endsAt: '2022-09-03', deadLine: '2022-09-08', unit: {…}, …}
-client
-: 
-{id: 'dc7b56a7-b7ee-40b1-a7b7-c990b2ad2e39', name: 'Julieta Sousa Fernandes', cpf: '624.272.180-57', isProfessor: false, loan: 300, …}
-configuration
-: 
-assessment
-: 
-20
-startedAt
-: 
-"2022-08-18T00:34:34.256+00:00"
-tolerance
-: 
-5
-[[Prototype]]
-: 
-Object
-deadLine
-: 
-"2022-09-08"
-endsAt
-: 
-"2022-09-03"
-id
-: 
-"c435701a-4949-4104-bd22-a53adf64b1b7"
-startsAt
-: 
-"2022-09-03"
-unit
-: 
-{ibsn: 450, book: {…}, client: {…}}
-[[Prototype]]
-: 
-Object
--->

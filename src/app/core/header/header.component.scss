@@ -73,11 +73,11 @@ header{
 					left: 0;
 					margin: auto;
 					transition: all 150ms ease-in-out;
-					border: 2px solid transparent;
+					border-bottom: 3px solid transparent;
 					position: absolute;
 				}
 				&:hover::after{
-					border: 2px solid var(--900);
+					border-bottom: 3px solid var(--900);
 					width: 100%;
 				}
 			}

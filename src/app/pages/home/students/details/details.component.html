@@ -1,7 +1,26 @@
-<div class="responsive-container">
-	<mat-card>
-		<h1 style="text-align: center;">
+<div class="responsive-container" *ngIf="student$ | async as student">
+	<mat-card style="display: flex; flex-direction: row; justify-content: space-between;">
+		<h1>
 			{{response.data.name}}
+		</h1>
+		<h1>
+			{{response.data.cpf}}
 		</h1>		
 	</mat-card>
+	<form action="post" #itemForm="ngForm">
+	
+		<mat-form-field *ngIf="student$ | async as student">
+			<input 
+				matInput
+				placeholder="Nome" 
+				[(ngModel)]="student.data.name" 
+				name ="name"
+				[disabled] = "!enableNameEdit"
+			>
+		</mat-form-field>
+		<button>
+			<mat-icon (click)="toggleEditButtonDisabled()">edit</mat-icon>
+		</button>
+		
+	</form>
 </div>

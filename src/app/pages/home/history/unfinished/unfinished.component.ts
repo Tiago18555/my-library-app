@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
+import { MatRow } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { BorrowingResponseDataModel } from 'src/app/models/response-models/borrowing';
@@ -12,7 +13,7 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 })
 export class UnfinishedComponent implements OnInit {
 
-  public displayedColumns: string[] = ['aluno', 'titulo', 'emprestimo', 'devolucao', 'multa']
+  public displayedColumns: string[] = ['aluno', 'titulo', 'emprestimo', 'prazo', 'multa']
   public dataTableSource : any
   public dataSource$ : Observable<any> = of([])
 
@@ -23,7 +24,6 @@ export class UnfinishedComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadLoans();
-
   }
 
   loadLoans() : void {
@@ -43,6 +43,10 @@ export class UnfinishedComponent implements OnInit {
     console.log(params);
     
     this.router.navigate(['/home/books/edit/', params]);
+  }
+
+  seeLoan(TView : any) : void {
+    console.log(TView)
   }
 
 }

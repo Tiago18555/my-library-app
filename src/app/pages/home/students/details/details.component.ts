@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { StudentResponseDataModel, StudentResponseModelSingle, StudentResponseModel } from 'src/app/models/response-models/student';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
@@ -18,6 +19,9 @@ export class DetailsComponent implements OnInit {
     },
     httpstatus : ''
   };
+  public student$ : Observable<any> = of();
+
+  public enableNameEdit : boolean = false;
 
   constructor(
     private router: Router,
@@ -29,10 +33,14 @@ export class DetailsComponent implements OnInit {
   }
 
   loadStudent() : void {
-    this.service.getStudentByCpf(this.cpf).subscribe(res => {
+    this.student$ = this.service.getStudentByCpf(this.cpf)
+    this.student$.subscribe(res => {
       this.response = res;
       console.log(res.data);      
     })
   }
 
+  toggleEditButtonDisabled() : void {
+    this.enableNameEdit = !this.enableNameEdit
+  }
 }
