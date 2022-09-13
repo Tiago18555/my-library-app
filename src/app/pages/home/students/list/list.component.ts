@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 interface Student {
+  id: string;
   cpf: string;
 }
 
@@ -36,8 +37,6 @@ export class ListComponent implements OnInit {
   }
 
   viewDetails(row: Student) : void {
-    console.log(row);  
-    ///TODO: implementar rota para detalhes do aluno  
     this.router.navigate(['home/students/details/' + row.cpf]);
   }
 }

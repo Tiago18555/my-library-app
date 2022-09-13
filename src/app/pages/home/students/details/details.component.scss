@@ -1,0 +1,38 @@
+.main-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	mat-card {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.icon {
+			mat-icon {
+
+			}
+			&:hover {
+				cursor: pointer;
+				color: red;
+
+			}
+		}
+	}
+	form {
+		flex: 0.5;
+		.inputfield {
+			display: flex;
+			flex-direction: row;
+			justify-items: space-between;
+
+			mat-form-field {
+				flex: 1;
+			}
+
+			button {
+				margin-bottom: 17px;
+			}
+		}
+	}
+}

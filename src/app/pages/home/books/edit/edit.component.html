@@ -73,13 +73,10 @@
 				</strong>
 			</mat-list-item>
 
-			<mat-list-item 
+			<mat-list-item
 				*ngFor="let unit of units.data; let i = index;"
-				(click)="selectUnit(unit.ibsn)"
-				[ngClass]="{
-					'selected' : unitIsSelected,
-					'unselected' : !unitIsSelected
-				}"
+				[id]="i"
+				(click)="selectUnit(unit.ibsn, $event)"				
 			>
 				{{unit.ibsn}}
 			</mat-list-item>

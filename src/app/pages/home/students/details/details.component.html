@@ -1,26 +1,56 @@
-<div class="responsive-container" *ngIf="student$ | async as student">
-	<mat-card style="display: flex; flex-direction: row; justify-content: space-between;">
-		<h1>
-			{{response.data.name}}
-		</h1>
-		<h1>
-			{{response.data.cpf}}
-		</h1>		
+<div class="responsive-container main-container" *ngIf="student$ | async as student">
+
+	<mat-card>
+		<span>
+			{{response.data.name | uppercase}}
+		</span>
+		<span class="icon" (click)="toggleShowForm()">
+			<mat-icon>keyboard_arrow_down</mat-icon>
+		</span>
 	</mat-card>
-	<form action="post" #itemForm="ngForm">
-	
-		<mat-form-field *ngIf="student$ | async as student">
-			<input 
-				matInput
-				placeholder="Nome" 
-				[(ngModel)]="student.data.name" 
-				name ="name"
-				[disabled] = "!enableNameEdit"
-			>
-		</mat-form-field>
-		<button>
-			<mat-icon (click)="toggleEditButtonDisabled()">edit</mat-icon>
-		</button>
+	<form action="post" #itemForm="ngForm" *ngIf="showForm">
+
+		<div class="inputfield" *ngIf="student$ | async as student">
+			<mat-form-field>
+				<input 
+					matInput
+					placeholder="Nome" 
+					[(ngModel)]="student.data.name" 
+					name ="name"
+					[disabled] = "!enableNameEdit"
+				>
+			</mat-form-field>
+			<button>
+				<mat-icon (click)="toggleEditNameButtonDisabled()">edit</mat-icon>
+			</button>
+		</div>
+
+		<div class="inputfield" *ngIf="student$ | async as student">
+			<mat-form-field>
+				<input 
+					matInput
+					placeholder="Cpf" 
+					[(ngModel)]="student.data.cpf" 
+					name ="cpf"
+					[disabled] = "!enableCpfEdit"
+					>
+				</mat-form-field>
+			<button>
+				<mat-icon (click)="toggleEditCpfButtonDisabled()">edit</mat-icon>
+			</button>
+		</div>	
 		
+		<div class="inputfield" *ngIf="student$ | async as student">
+			<mat-form-field>
+				<input 
+					matInput
+					placeholder="Multa acumulada" 
+					[(ngModel)]="student.data.loan" 
+					name ="loan"
+					[disabled] = "true"
+					readonly = true
+				>
+				</mat-form-field>
+		</div>
 	</form>
 </div>

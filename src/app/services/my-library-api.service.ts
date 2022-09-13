@@ -168,8 +168,8 @@ export class MyLibraryApiService {
 
   getStudentByCpf(cpf: string) : Observable<StudentResponseModelSingle> {
     return this.HttpClient
-    .get<StudentResponseModelSingle>( `${this.BASEURL}student/${cpf}`, this.header )
-    .pipe(delay(this.BASEDELAY), first());
+      .get<StudentResponseModelSingle>( `${this.BASEURL}student/${cpf}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
   }
 
   /**
@@ -196,6 +196,15 @@ export class MyLibraryApiService {
   loadUnfinishedBorrows() : Observable<BorrowingResponseModel> {
     return this.HttpClient
       .get<BorrowingResponseModel>( `${this.BASEURL}borrowing?filter=unfinished`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  /**
+   * @returns ObservableBorrowingResponseModel<>
+   */
+  VerifyBorrowsFromClient(id: String) : Observable<StudentResponseModelSingle> {
+    return this.HttpClient
+      .get<StudentResponseModelSingle>( `${this.BASEURL}borrowing/${id}`, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 }

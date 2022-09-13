@@ -80,6 +80,10 @@ export class EditComponent implements OnInit {
     )
   }
 
+  applyClass(i: any) {
+    
+  }
+
   setAuthor(author : MatSelect) : void {
     this.authorSelected = author.value
     console.log(this.authorSelected);
@@ -182,7 +186,20 @@ export class EditComponent implements OnInit {
     })
   }
 
-  selectUnit(e: any) : void {
+  selectUnit(e: any, ev: any) : void {
+
+
+    
+    if (ev.srcElement.parentElement.classList.contains("selected")) {
+      ev.srcElement.parentElement.classList.add("unselected")
+      ev.srcElement.parentElement.classList.remove("selected")
+    } else {
+      ev.srcElement.parentElement.classList.add("selected")
+      ev.srcElement.parentElement.classList.remove("un0selected")
+    }
+    
+    
+    
     //console.log(e);    
     this.unitIsSelected = !this.unitIsSelected
   }

@@ -33,8 +33,7 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  viewDetails(row: any) : void {
-    console.log(row);  
+  viewDetails(row: any) : void {     
     ///TODO: implementar rota para detalhes do aluno  
     this.router.navigate(['home/students/details/' + row.client.cpf]);
   }

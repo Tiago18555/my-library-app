@@ -20,13 +20,15 @@ export class CalcLoanPipe implements PipeTransform {
 
     let diff = this.getDayDiff(
       new Date(deadLine),
-      new Date(endsAt || new Date().toLocaleDateString('pt-br'))
+      new Date(endsAt || new Date().toLocaleDateString('en-us'))
     )
+
+    let result = (diff * assessment).toFixed(2)
 
     if(diff <= 0) {
       return 'isento'
     } else {
-      return String('R$ ' + diff * assessment + '.00')
+      return String('R$ ' + String(result))
     } 
   }
 }

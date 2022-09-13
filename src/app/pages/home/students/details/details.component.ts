@@ -20,8 +20,11 @@ export class DetailsComponent implements OnInit {
     httpstatus : ''
   };
   public student$ : Observable<any> = of();
+  public showForm : boolean = false;
+  public showAddNewBorrow : boolean = false;
 
   public enableNameEdit : boolean = false;
+  public enableCpfEdit : boolean = false;
 
   constructor(
     private router: Router,
@@ -35,12 +38,37 @@ export class DetailsComponent implements OnInit {
   loadStudent() : void {
     this.student$ = this.service.getStudentByCpf(this.cpf)
     this.student$.subscribe(res => {
-      this.response = res;
-      console.log(res.data);      
+      this.response = res;     
+      this.loadBorrowings(res.data.id)
     })
   }
 
-  toggleEditButtonDisabled() : void {
+  loadBorrowings(id: String) : void {
+    this.service.VerifyBorrowsFromClient(id).subscribe(res => {
+      
+      if(res.data.loan && res.data.loan > 0) {
+        this.showAddNewBorrow = false;
+
+        ///TODO: trocar esse alert
+        alert('OPA AI NÃO AMIGO');
+      }
+    },
+    err => {   
+      alert('OPA AI SIM AMIGO');
+      this.showAddNewBorrow = true;  
+      console.log(err);      
+    })
+  }
+
+  toggleEditNameButtonDisabled() : void {
     this.enableNameEdit = !this.enableNameEdit
+  }
+
+  toggleEditCpfButtonDisabled() : void {
+    this.enableCpfEdit = !this.enableCpfEdit
+  }
+
+  toggleShowForm() : void {
+    this.showForm = !this.showForm
   }
 }
