@@ -1,27 +1,27 @@
 <div class="inner-container">
 	<div *ngIf="formFields$ | async as formFields; else loading" class="form-wrapper">
 		<form action="post" #itemForm="ngForm">
-		
+
 			<mat-form-field *ngIf="formFields$ | async as formFields">
-				<input 
+				<input
 					matInput
-					placeholder="Título" 
-					[(ngModel)]="formFields.data.title" 
+					placeholder="Título"
+					[(ngModel)]="formFields.data.title"
 					name ="title"
 					(ngModelChange)="controlSubmit(formFields.data)"
 				>
 			</mat-form-field>
-		
+
 			<mat-form-field *ngIf="formFields$ | async as formFields">
-				<textarea 
-					matInput 
-					placeholder="Descrição" 
-					[(ngModel)]="formFields.data.description" 
+				<textarea
+					matInput
+					placeholder="Descrição"
+					[(ngModel)]="formFields.data.description"
 					name ="descricao"
 					(ngModelChange)="controlSubmit(formFields.data)"
 				></textarea>
 			</mat-form-field>
-		
+
 			<mat-form-field *ngIf="authors$ | async as authors">
 				<mat-label>{{authorSelected.name}}</mat-label>
 				<mat-select [value]="authorSelected" matNativeControl required #authorSelect (selectionChange)="setAuthor(authorSelect)">
@@ -30,7 +30,7 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
-		
+
 			<mat-form-field *ngIf="publishers$ | async as publishers">
 				<mat-label>{{publisherSelected.name}}</mat-label>
 				<mat-select [value]="publisherSelected" matNativeControl required #publisherSelect (selectionChange)="setPublisher(publisherSelect)">
@@ -39,25 +39,25 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
-		
+
 			<mat-form-field *ngIf="formFields$ | async as formFields">
-				<input 
-					matInput 
-					placeholder="Quantidade" 
-					name ="formFielavailableAmount"
+				<input
+					matInput
+					placeholder="Quantidade"
+					name ="formFieldavailableAmount"
 					type = "number"
 					min = "1"
 					readonly = true
-					[(ngModel)]="formFields.data.availableAmount" 
+					[(ngModel)]="formFields.data.availableAmount"
 					(ngModelChange)="controlSubmit(formFields.data)"
 				>
 			</mat-form-field>
-		
-			<button 
-				mat-raised-button 
-				color="primary" 
-				type="submit" 
-				(click)="onSubmit(itemForm)" 
+
+			<button
+				mat-raised-button
+				color="primary"
+				type="submit"
+				(click)="onSubmit(itemForm)"
 				[disabled]="this.disableSubmit"
 			>
 				Salvar modificações
@@ -69,14 +69,14 @@
 
 			<mat-list-item>
 				<strong>
-					UNID.					
+					UNID.
 				</strong>
 			</mat-list-item>
 
 			<mat-list-item
 				*ngFor="let unit of units.data; let i = index;"
 				[id]="i"
-				(click)="selectUnit(unit.ibsn, $event)"				
+				(click)="selectUnit($event)"
 			>
 				{{unit.ibsn}}
 			</mat-list-item>

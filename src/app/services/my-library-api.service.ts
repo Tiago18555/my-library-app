@@ -20,7 +20,7 @@ import { LocalStorageService } from './local-storage.service';
 export class MyLibraryApiService {
 
   constructor(
-    private HttpClient: HttpClient, 
+    private HttpClient: HttpClient,
     private localStorage: LocalStorageService,
     private router: Router
   ) { }
@@ -34,11 +34,12 @@ export class MyLibraryApiService {
    * @summary: Host section
    */
   //private readonly baseUrl = 'http://tiago-my-library-api.herokuapp.com/';
-  private readonly BASEURL = 'http://localhost:8080/';
+  //private readonly BASEURL = 'http://localhost:8080/';
+  private readonly BASEURL = 'https://mylibrary-production.up.railway.app/';
 
 
   /**
-   * @summary: Header options 
+   * @summary: Header options
    */
   private readonly BEARER = 'Bearer ';
   private header = {
@@ -54,19 +55,19 @@ export class MyLibraryApiService {
    */
 
   /**
-   * @param authModel 
+   * @param authModel
    * @returns Observable<AuthResponseModel>
    */
-  authenticate(authModel: AuthRequestModel) : Observable<AuthResponseModel> {    
+  authenticate(authModel: AuthRequestModel) : Observable<AuthResponseModel> {
     return this.HttpClient.post<AuthResponseModel>(`${this.BASEURL}login`, authModel  )
     .pipe(
       first(),
       tap(data => {
-        this.localStorage.setString('session', data.token); 
+        this.localStorage.setString('session', data.token);
       })
     );
   }
-  
+
   /**
    * @description: Remove a session from local storage and redirect to login page
    */
@@ -76,10 +77,10 @@ export class MyLibraryApiService {
   }
 
   /**
-   * @param token 
+   * @param token
    * @returns Observable<ValidateResponseModel>
    */
-  validate(token: ValidateRequestModel) : Observable<ValidateResponseModel> {    
+  validate(token: ValidateRequestModel) : Observable<ValidateResponseModel> {
     return this.HttpClient.post<ValidateResponseModel>( `${this.BASEURL}validate`, token )
     .pipe(
       first()
@@ -89,12 +90,12 @@ export class MyLibraryApiService {
   /**
    * @summary: Book endpoint
    */
-  
+
 
   /**
    * @returns Observable<BookResponseModel>
    */
-  listAllBooks() : Observable<BookResponseModel> {        
+  listAllBooks() : Observable<BookResponseModel> {
     return this.HttpClient
       .get<BookResponseModel>( `${this.BASEURL}book`, this.header )
       .pipe(delay(this.BASEDELAY), first())
@@ -128,7 +129,7 @@ export class MyLibraryApiService {
   }
 
   /**
-   * @param book 
+   * @param book
    * @returns Observable<BookResponseModel>
    */
   addBook(book: BookPostModel) : Observable<BookResponseModel> {
@@ -138,7 +139,7 @@ export class MyLibraryApiService {
   }
 
   /**
-   * @param title 
+   * @param title
    * @returns Observable<BookResponseModel>
    */
   getBookByTitle(title: string) : Observable<BookResponseDataModelSingle> {

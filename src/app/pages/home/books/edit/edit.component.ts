@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { BookPostModel, BookUpdateModel } from 'src/app/models/request-models/book';
 import { BookModel, BookResponseDataModel, BookResponseDataModelSingle } from 'src/app/models/response-models/book';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
@@ -25,7 +26,7 @@ export class EditComponent implements OnInit {
   ) { }
 
   public title = decodeURI(this.router.routerState.snapshot.url).replace('/home/books/edit/', '')
-  
+
   //VISUAL CONTROLS
   public disableSubmit : boolean = true;
   private readonly MINIMUM_TITLE_FIELD_SIZE : number = 3
@@ -33,7 +34,7 @@ export class EditComponent implements OnInit {
   private readonly MINIMUM_DESCRIPTION_FIELD_SIZE : number = 10
   private readonly MAXIMUM_DESCRIPTION_FIELD_SIZE : number = 2048
   private readonly MINIMUM_QUANTITY_SIZE : number = 1
-  
+
   public authors$ : Observable<any> = of([])
   public publishers$ : Observable<any> = of([])
   public formFields$ : Observable<any> = of([])
@@ -45,33 +46,36 @@ export class EditComponent implements OnInit {
   public unitIsSelected : boolean = false;
 
   public bookId : string = '';
+  public currentTitle : string = '';
 
   ngOnInit() {
     this.editBook()
   }
-  
+
   /**
    * @description Verifica se os campos do formulário estão preenchidos para habilitar o botão de submit.
    */
+
   controlSubmit(input : BookResponseDataModel) : void {
-    
+
+    this.currentTitle = input.title
     if(this.fieldsAreValid(input)) {
       this.disableSubmit = false
     } else {
       this.disableSubmit = true
     }
   }
-  
-  public fieldsAreValid(input : BookResponseDataModel) : boolean {   
+
+  public fieldsAreValid(input : BookResponseDataModel) : boolean {
 
     return (
       input.title.length >= this.MINIMUM_TITLE_FIELD_SIZE &&
       input.title.length <= this.MAXIMUM_TITLE_FIELD_SIZE &&
       input.availableAmount >= this.MINIMUM_QUANTITY_SIZE &&
-      (     
+      (
         input.description === '' ||
         input.description.length > this.MINIMUM_DESCRIPTION_FIELD_SIZE
-      ) 
+      )
         ||
       (
         input.description === '' &&
@@ -81,14 +85,14 @@ export class EditComponent implements OnInit {
   }
 
   applyClass(i: any) {
-    
+
   }
 
   setAuthor(author : MatSelect) : void {
     this.authorSelected = author.value
-    console.log(this.authorSelected);
-    
+    console.log(this.authorSelected)
   }
+
   setPublisher(publisher : MatSelect) : void {
     this.publisherSelected = publisher.value
     console.log(this.publisherSelected);
@@ -98,30 +102,31 @@ export class EditComponent implements OnInit {
    * @description Limpa todos os campos do formulário.
    */
 
-  onSubmit(params: NgForm) : void {  
+  onSubmit(params: NgForm) : void {
 
     let book : BookUpdateModel;
 
     console.log(this.bookSelected);
-    
+
 
     const DO_UPDATE = ( book: BookUpdateModel ) => {
       console.table(book)
       this.service.updateBook(book).subscribe(res => {
         if (res.httpstatus === 'OK') {
           alert('Livro atualizado com sucesso!')
+
           this.editBook()
         }
         else if (res.httpstatus !== 'OK') {
           alert('Erro ao atualizar o livro: ' + res.httpstatus)
-          
+
         }
       })
     }
     /**
      * @region essa sequencia de condicionais são para controlar quais campos serão enviados para a API
      */
-    
+
 
     if (this.authorSelected.id !== '' && this.publisherSelected.id !== '') {
       book = {
@@ -134,8 +139,8 @@ export class EditComponent implements OnInit {
       }
       DO_UPDATE(book)
     }
-    
-    if (this.authorSelected.id !== '' && this.publisherSelected.id === '') {      
+
+    if (this.authorSelected.id !== '' && this.publisherSelected.id === '') {
       book = {
         id: this.bookSelected,
         author : this.authorSelected.id,
@@ -174,22 +179,27 @@ export class EditComponent implements OnInit {
 
   editBook() : void {
 
-    this.formFields$ = this.service.getBookByTitle(this.title)
+    this.formFields$ = this.currentTitle === '' || this.currentTitle === undefined
+      ? this.service.getBookByTitle(this.title)
+      : this.service.getBookByTitle(this.currentTitle)
+
     this.authors$ = this.service.listAllAuthors()
     this.publishers$ = this.service.listAllPublishers()
     this.formFields$.subscribe(response => {
+
+      console.log(response)
+
       this.authorSelected = { name: response.data.authorName, id: '' }
       this.publisherSelected = { name: response.data.publisher.publisherName, id: '' }
       this.bookSelected = response.data.id
-      console.log(response);      
       this.units$ = this.service.listAllIbsnsByBook(this.bookSelected)
     })
   }
 
-  selectUnit(e: any, ev: any) : void {
+  selectUnit(ev: any) : void {
 
 
-    
+
     if (ev.srcElement.parentElement.classList.contains("selected")) {
       ev.srcElement.parentElement.classList.add("unselected")
       ev.srcElement.parentElement.classList.remove("selected")
@@ -197,17 +207,15 @@ export class EditComponent implements OnInit {
       ev.srcElement.parentElement.classList.add("selected")
       ev.srcElement.parentElement.classList.remove("un0selected")
     }
-    
-    
-    
-    //console.log(e);    
+
+
+
+    //console.log(e);
     this.unitIsSelected = !this.unitIsSelected
   }
 
   getIndex(index: any) {
-    //console.log(index);
     console.log(this.index)
-    
   }
 
   @ViewChild('index')
