@@ -23,7 +23,7 @@ interface BookUpdateModel {
 	title?: string
 }
 
-export { 
+export {
 	BookPostModel,
 	BookUpdateModel
 };

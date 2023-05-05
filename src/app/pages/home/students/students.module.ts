@@ -9,13 +9,16 @@ import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/shared/app-material/app-material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { StudentsComponent } from './students.component';
+import { AddComponent } from './add/add.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 @NgModule({
   declarations: [
     DetailsComponent,
     ListComponent,
-    StudentsComponent
+    StudentsComponent,
+    AddComponent,
   ],
   imports: [
     CommonModule,
@@ -23,12 +26,14 @@ import { StudentsComponent } from './students.component';
     CoreModule,
     FormsModule,
     AppMaterialModule,
-    BrowserModule
+    BrowserModule,
+    PipesModule
   ],
   exports: [
     DetailsComponent,
     ListComponent,
-    StudentsComponent
+    StudentsComponent,
+    AddComponent
   ]
 })
 export class StudentsModule { }

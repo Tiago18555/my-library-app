@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
-import { BookPostModel, BookUpdateModel } from 'src/app/models/request-models/book';
-import { BookModel, BookResponseDataModel, BookResponseDataModelSingle } from 'src/app/models/response-models/book';
+import { BookUpdateModel } from 'src/app/models/request-models/book';
+import { BookResponseDataModel } from 'src/app/models/response-models/book';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 interface SelectOutput {
@@ -27,7 +26,11 @@ export class EditComponent implements OnInit {
 
   public title = decodeURI(this.router.routerState.snapshot.url).replace('/home/books/edit/', '')
 
-  //VISUAL CONTROLS
+
+  /**
+   * @region Visual controls
+   */
+
   public disableSubmit : boolean = true;
   private readonly MINIMUM_TITLE_FIELD_SIZE : number = 3
   private readonly MAXIMUM_TITLE_FIELD_SIZE : number = 39
@@ -84,9 +87,6 @@ export class EditComponent implements OnInit {
     )
   }
 
-  applyClass(i: any) {
-
-  }
 
   setAuthor(author : MatSelect) : void {
     this.authorSelected = author.value
@@ -208,9 +208,6 @@ export class EditComponent implements OnInit {
       ev.srcElement.parentElement.classList.remove("un0selected")
     }
 
-
-
-    //console.log(e);
     this.unitIsSelected = !this.unitIsSelected
   }
 

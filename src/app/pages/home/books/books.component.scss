@@ -1,11 +1,11 @@
 mat-card {
-	
-	.sub-menu {
-		display: flex;
+
+  .sub-menu {
+    display: flex;
 		flex-direction: row;
 
 		ul {
-			flex: 1;
+      flex: 1;
 			list-style-type: none;
 			padding: 1em 0 0;
 			margin: 0;
@@ -14,6 +14,7 @@ mat-card {
 			justify-content: space-between;
 
 			li {
+        border: 1px solid transparent;
 				width: fit-content;
 				height: fit-content;
 				margin: 0;
@@ -31,8 +32,6 @@ mat-card {
 				/* Firefox */
 				-ms-user-select: none;
 				/* Internet Explorer/Edge */
-				user-select: none;
-				/* Non-prefixed version, currently*/
 
 				//position: relative;
 
@@ -41,19 +40,14 @@ mat-card {
 					font-size: 1.2rem;
 				}
 
-					border: 0% ;
-					border-radius: 50%;
-					margin: auto;
-					transition: all 200ms ease-in-out;
-					border: 1px solid transparent;
-				
+
 
 				&:hover {
-					
+
 					border: 1px solid var(--900);
 					border: 100%;
 					border-radius: 50%;
-					
+
 				}
 			}
 		}

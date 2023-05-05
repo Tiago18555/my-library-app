@@ -1,0 +1,46 @@
+<mat-card class="responsive-container">
+  <form action="post">
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Nome"
+        [(ngModel)]="formFields.name"
+        name ="name"
+        (ngModelChange)="controlSubmit()"
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="CPF"
+        [(ngModel)]="formFields.cpf"
+        name ="cpf"
+        (ngModelChange)="controlSubmit()"
+      >
+    </mat-form-field>
+
+    <mat-card >
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onCancel()"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+        [disabled]="this.disableSubmit"
+      >
+        Cadastrar
+      </button>
+    </mat-card>
+
+  </form>
+</mat-card>
+

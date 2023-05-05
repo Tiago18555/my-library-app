@@ -14,31 +14,35 @@
 
 	  <div class="header-menu">
 		  <ul>
-			<li 
+			<li
+        class="underline-animation"
 				[ngClass]="{
-					'active' : InicioIsActive, 
+					'active' : InicioIsActive,
 					'inactive' : !InicioIsActive
-				}" 
+				}"
 				[routerLink]="['welcome']"
 			>INICIO</li>
 
 			<li
+        class="underline-animation"
 				[ngClass]="{
 					'active' : AlunosIsActive,
 					'inactive' : !AlunosIsActive
-				}" 
+				}"
 				[routerLink]="['students/list']"
 			>ALUNOS</li>
 
-			<li 
+			<li
+        class="underline-animation"
 				[ngClass]="{
 					'active' : ProfessoresIsActive,
 					'inactive' : !ProfessoresIsActive
-				}" 
+				}"
 				[routerLink]="['professors']"
 			>PROFESSORES</li>
-			
-			<li 
+
+			<li
+        class="underline-animation"
 				[ngClass]="{
 					'active' : AcervoIsActive,
 					'inactive' : !AcervoIsActive
@@ -46,11 +50,12 @@
 				[routerLink]="['books/list']"
 			>ACERVO</li>
 
-			<li 
+			<li
+        class="underline-animation"
 				[ngClass]="{
 					'active' : RegistroIsActive,
 					'inactive' : !RegistroIsActive
-				}" 
+				}"
 				[routerLink]="['history/unfinished']"
 			>REGISTROS</li>
 		  </ul>

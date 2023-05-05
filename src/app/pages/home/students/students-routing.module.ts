@@ -9,24 +9,25 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { DetailsComponent } from './details/details.component';
 import { ListComponent } from './list/list.component';
 import { StudentsComponent } from './students.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
-  { 
-    path: 'home', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard], 
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
-      { 
-        path: '', 
-        redirectTo: 'welcome', 
-        pathMatch: 'full' 
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full'
       },
-      { 
-        path: 'welcome', 
+      {
+        path: 'welcome',
         component: WelcomeComponent
       },
-      { 
-        path: 'students', 
+      {
+        path: 'students',
         component: StudentsComponent,
         children: [
           {
@@ -41,22 +42,26 @@ const routes: Routes = [
           {
             path: 'details/:id',
             component: DetailsComponent
+          },
+          {
+            path: 'add',
+            component: AddComponent
           }
         ]
       },
-      { 
-        path: 'professors', 
+      {
+        path: 'professors',
         component: ProfessorsComponent
       },
-      { 
-        path: 'history', 
+      {
+        path: 'history',
         component: HistoryComponent
       },
-      { 
-        path: 'books', 
+      {
+        path: 'books',
         component: BooksComponent
       }
-    ] 
+    ]
   }
 ];
 

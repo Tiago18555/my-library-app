@@ -16,7 +16,7 @@ interface Student {
 })
 export class ListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['cpf', 'nome']
+  public displayedColumns: string[] = ['nome', 'cpf']
   public dataTableSource : any
   public dataSource$ : Observable<any> = of([])
 
@@ -27,6 +27,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStudents()
+  }
+
+  addStudent(){
+    this.router.navigate(['home/students/add']);
   }
 
   loadStudents() : void {

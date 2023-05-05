@@ -12,6 +12,7 @@ import { BorrowingResponseModel } from '../models/response-models/borrowing';
 import { PublisherResponseModel } from '../models/response-models/publisher';
 import { StudentResponseModel, StudentResponseModelSingle } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
+import { StudentPostModel } from '../models/request-models/student';
 
 
 @Injectable({
@@ -170,6 +171,12 @@ export class MyLibraryApiService {
   getStudentByCpf(cpf: string) : Observable<StudentResponseModelSingle> {
     return this.HttpClient
       .get<StudentResponseModelSingle>( `${this.BASEURL}student/${cpf}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  addStudent(student: StudentPostModel): Observable<StudentResponseModelSingle> {
+    return this.HttpClient
+      .post<StudentResponseModelSingle>( `${this.BASEURL}student/register`, student, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 

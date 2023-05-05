@@ -5,7 +5,7 @@ header{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	
+
 	.app-mat-toolbar{
 		span{
 			margin-left: 3.8vw;
@@ -18,7 +18,7 @@ header{
 		max-width: 1280px;
 		width: calc(100% - 400px);
 
-			
+
 		@media (min-width: 1680px) {
 			& {
 				margin: 0 auto;
@@ -31,7 +31,7 @@ header{
 				width: 100%;
 			}
 		}
-		
+
 		ul{
 			list-style-type: none;
 			display: flex;
@@ -51,7 +51,7 @@ header{
 				vertical-align: middle;
 				margin: 0;
 				position: relative;
-			  
+
 				//Desabilitar SELEÇÃO DE TEXTO
 				user-select: none; /* supported by Chrome and Opera */
 				-webkit-user-select: none; /* Safari */
@@ -59,31 +59,10 @@ header{
 				-moz-user-select: none; /* Firefox */
 				-ms-user-select: none; /* Internet Explorer/Edge */
 				user-select: none; /* Non-prefixed version, currently*/
-
-				&:hover{
-					cursor: pointer;
-				}
-
-				
-				&::after {
-					content:'';
-					width: 0%;
-					bottom: 0;
-					right: 0;
-					left: 0;
-					margin: auto;
-					transition: all 150ms ease-in-out;
-					border-bottom: 3px solid transparent;
-					position: absolute;
-				}
-				&:hover::after{
-					border-bottom: 3px solid var(--900);
-					width: 100%;
-				}
 			}
 		}
 	}
-	
+
 }
 .active {
 	background-color: var(--200);

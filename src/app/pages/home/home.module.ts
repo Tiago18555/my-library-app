@@ -32,7 +32,7 @@ import { HistoryModule } from './history/history.module';
     BooksModule,
     StudentsModule,
     HistoryModule,
-    BrowserModule
+    BrowserModule,
   ],
   exports: [
     HomeComponent,
