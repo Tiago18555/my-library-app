@@ -9,9 +9,13 @@
 		justify-content: space-between;
 
 		.icon {
+			mat-icon {
+
+			}
 			&:hover {
 				cursor: pointer;
 				color: red;
+
 			}
 		}
 	}

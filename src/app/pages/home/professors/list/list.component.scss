@@ -1,0 +1,26 @@
+table {
+	width: 100%;
+	//margin: 10px;
+
+	.mat-row .mat-cell {
+		cursor: pointer;
+	}
+
+	.mat-row:hover .mat-cell {
+		background-color: #f5f5f5;
+	}
+	.col {
+		text-align: center;
+		margin: 0;
+		padding: 0;
+		width: 10em;
+
+		mat-icon {
+			cursor: pointer;
+
+			&:hover {
+				color: red;
+			}
+		}
+	}
+}

@@ -1,0 +1,43 @@
+<div class="responsive-container main-container" *ngIf="professor$ | async as professor">
+
+	<mat-card>
+		<span>
+			{{response.data.name | uppercase}}
+		</span>
+		<span class="icon" (click)="toggleShowForm()">
+			<mat-icon>keyboard_arrow_down</mat-icon>
+		</span>
+	</mat-card>
+	<form action="post" #itemForm="ngForm" *ngIf="showForm">
+
+		<div class="inputfield" *ngIf="professor$ | async as professor">
+			<mat-form-field>
+				<input
+					matInput
+					placeholder="Nome"
+					[(ngModel)]="professor.data.name"
+					name ="name"
+					[disabled] = "!enableNameEdit"
+				>
+			</mat-form-field>
+			<button>
+				<mat-icon (click)="toggleEditNameButtonDisabled()">edit</mat-icon>
+			</button>
+		</div>
+
+		<div class="inputfield" *ngIf="professor$ | async as professor">
+			<mat-form-field>
+				<input
+					matInput
+					placeholder="Cpf"
+					[(ngModel)]="professor.data.cpf"
+					name ="cpf"
+					[disabled] = "!enableCpfEdit"
+					>
+				</mat-form-field>
+			<button>
+				<mat-icon (click)="toggleEditCpfButtonDisabled()">edit</mat-icon>
+			</button>
+		</div>
+	</form>
+</div>

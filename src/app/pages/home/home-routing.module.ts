@@ -9,24 +9,26 @@ import { DetailsComponent } from './students/details/details.component';
 import { ListComponent } from './students/list/list.component';
 import { StudentsComponent } from './students/students.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ListComponent as PListComponent } from './professors/list/list.component';
+import { DetailsComponent as PDetailsComponent } from './professors/details/details.component';
 
 const routes: Routes = [
-  { 
-	path: 'home', 
-	component: HomeComponent, 
-	canActivate: [AuthGuard], 
+  {
+	path: 'home',
+	component: HomeComponent,
+	canActivate: [AuthGuard],
 	children: [
-		{ 
-			path: '', 
-			redirectTo: 'welcome', 
-			pathMatch: 'full' 
+		{
+			path: '',
+			redirectTo: 'welcome',
+			pathMatch: 'full'
 		},
-		{ 
-			path: 'welcome', 
-			component: WelcomeComponent 
+		{
+			path: 'welcome',
+			component: WelcomeComponent
 		},
-		{ 
-			path: 'students', 
+		{
+			path: 'students',
 			component: StudentsComponent,
 			children: [
 				{
@@ -44,17 +46,32 @@ const routes: Routes = [
 				}
 			  ]
 		},
-		{ 
-			path: 'professors', 
-			component: ProfessorsComponent 
+		{
+			path: 'professors',
+			component: ProfessorsComponent ,
+      children: [
+        {
+          path: '',
+          redirectTo: 'list',
+          pathMatch: 'full'
+        },
+				{
+				  path: 'list',
+				  component: PListComponent
+				},
+				{
+				  path: 'details/:id',
+				  component: PDetailsComponent
+				}
+      ]
 		},
-		{ 
-			path: 'history', 
-			component: HistoryComponent 
+		{
+			path: 'history',
+			component: HistoryComponent
 		},
-		{ 
-			path: 'books', 
-			component: BooksComponent 
+		{
+			path: 'books',
+			component: BooksComponent
 		}
   ] }
 ];

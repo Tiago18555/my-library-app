@@ -13,6 +13,10 @@ import { PublisherResponseModel } from '../models/response-models/publisher';
 import { StudentResponseModel, StudentResponseModelSingle } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
 import { StudentPostModel } from '../models/request-models/student';
+import { ProfessorPostModel } from '../models/request-models/professor';
+import { ProfessorResponseModel, ProfessorResponseModelSingle } from '../models/response-models/professor';
+import { ConfigPostModel } from '../models/request-models/config';
+import { ConfigResponseModel, ConfigResponseModelHistory } from '../models/response-models/config';
 
 
 @Injectable({
@@ -181,6 +185,28 @@ export class MyLibraryApiService {
   }
 
   /**
+   * @returns Observable<ProfessorResponseModel>
+   */
+
+  loadProfessors() : Observable<ProfessorResponseModel> {
+    return this.HttpClient
+      .get<ProfessorResponseModel>( `${this.BASEURL}professor`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  getProfessorByCpf(cpf: string) : Observable<ProfessorResponseModelSingle> {
+    return this.HttpClient
+      .get<ProfessorResponseModelSingle>( `${this.BASEURL}professor/${cpf}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  addProfessor(student: ProfessorPostModel): Observable<ProfessorResponseModelSingle> {
+    return this.HttpClient
+      .post<ProfessorResponseModelSingle>( `${this.BASEURL}professor/register`, student, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  /**
    * @returns Observable<>
    */
   loadNextWeekBorrows() : Observable<BorrowingResponseModel> {
@@ -199,7 +225,7 @@ export class MyLibraryApiService {
   }
 
   /**
-   * @returns ObservableBorrowingResponseModel<>
+   * @returns Observable<BorrowingResponseModel>
    */
   loadUnfinishedBorrows() : Observable<BorrowingResponseModel> {
     return this.HttpClient
@@ -208,11 +234,48 @@ export class MyLibraryApiService {
   }
 
   /**
-   * @returns ObservableBorrowingResponseModel<>
+   * @returns Observable<BorrowingResponseModel>
    */
   VerifyBorrowsFromClient(id: String) : Observable<StudentResponseModelSingle> {
     return this.HttpClient
       .get<StudentResponseModelSingle>( `${this.BASEURL}borrowing/${id}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  VerifyBorrowLimitFromClient(id: String) : Observable<ProfessorResponseModelSingle> {
+    return this.HttpClient
+      .get<ProfessorResponseModelSingle>( `${this.BASEURL}borrowing/professor/${id}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  //LOT OF RESPONSES
+  //DoBorrow(id: string) : Observable<>
+  //DoDevolution
+
+  /**
+   * @returns Observable<ConfigResponseModel>
+   */
+  changeConfiguration(config: ConfigPostModel) : Observable<ConfigResponseModel> {
+    return this.HttpClient
+      .post<ConfigResponseModel>( `${this.BASEURL}configuration`, config, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  getLatestConfiguration() : Observable<ConfigResponseModel> {
+    return this.HttpClient
+      .get<ConfigResponseModel>( `${this.BASEURL}configuration/latest`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  getConfigurationById(id: string) : Observable<ConfigResponseModel> {
+    return this.HttpClient
+      .get<ConfigResponseModel>( `${this.BASEURL}configuration/${id}`, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  getAllConfigurations() : Observable<ConfigResponseModelHistory> {
+    return this.HttpClient
+      .get<ConfigResponseModelHistory>( `${this.BASEURL}configuration`, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 }
