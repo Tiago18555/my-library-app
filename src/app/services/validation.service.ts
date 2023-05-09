@@ -7,6 +7,21 @@ export class ValidationService {
 
   constructor() { }
 
+  cleanCpf(cpf: string): string {
+    let output : string = cpf
+
+    while(output.includes('.'))
+      output = cpf.replace('.', '')
+
+    while(output.includes('-'))
+      output = output.replace('-', '')
+
+    while(output.includes('/'))
+      output = output.replace('/', '')
+
+    return output
+  }
+
   isValidCPF(cpf: string): boolean {
 
     cpf = cpf.replace(/[\s.-]*/igm, '')

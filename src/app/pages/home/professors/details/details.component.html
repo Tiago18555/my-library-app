@@ -34,12 +34,9 @@
 					[(ngModel)]="professor.data.cpf"
           (ngModelChange)="controlEditButton(professor.data)"
 					name ="cpf"
-					[disabled] = "!enableCpfEdit"
+					[disabled] = true
 					>
 				</mat-form-field>
-			<button>
-				<mat-icon (click)="toggleEditCpfButtonDisabled()">edit</mat-icon>
-			</button>
 		</div>
 
     <button

@@ -14,7 +14,8 @@ interface ProfessorPostModel {
  */
 
 interface ProfessorUpdateModel {
-
+  cpf: string,
+  name: string
 }
 
 export {

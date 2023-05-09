@@ -35,7 +35,6 @@ export class DetailsComponent implements OnInit {
   public showAddNewBorrow : boolean = false;
 
   public enableNameEdit : boolean = false;
-  public enableCpfEdit : boolean = false;
   public disableEdit : boolean = true;
 
   public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolver']
@@ -78,10 +77,6 @@ export class DetailsComponent implements OnInit {
     this.enableNameEdit = !this.enableNameEdit
   }
 
-  toggleEditCpfButtonDisabled() : void {
-    this.enableCpfEdit = !this.enableCpfEdit
-  }
-
   toggleShowForm() : void {
     this.showForm = !this.showForm
   }
@@ -95,9 +90,6 @@ export class DetailsComponent implements OnInit {
       this.response.data.name != name &&
       this.response.data.name.length < this.MAXIMUM_NAME_SIZE &&
       this.response.data.name.length > this.MINIMUM_NAME_SIZE
-    ) || (
-      this.response.data.cpf != cpf &&
-      this.validate.isValidCPF(cpf)
     )
   }
 
@@ -121,38 +113,17 @@ export class DetailsComponent implements OnInit {
       })
     }
 
-    /**
-     * @region essa sequencia de condicionais controlam quais campos serão enviados para a api
-     */
-
-    let { name, cpf } = params.form.value
-    let Name = this.response.data.name
-    let Cpf = this.response.data.cpf
-
-    if (name !== Name && cpf !== Cpf) {
-      DO_UPDATE({
-        Name : name,
-        Cpf : cpf
-      })
-    }
+    let Name = params.form.value.name
+    let { name, cpf } = this.response.data
 
     if (name !== Name) {
       DO_UPDATE({
-        Name : name,
-        Cpf : Cpf // Same as the database
+        name : Name,
+        cpf : this.validate.cleanCpf(cpf)
       })
+    } else {
+      alert("O novo nome deve ser diferente do anterior.")
     }
-
-    if (name !== Name) {
-      DO_UPDATE({
-        Name : Name, // Same as the database
-        Cpf : cpf
-      })
-    }
-
-    /**
-     * @endregion
-     */
   }
 
   viewBookDetails = (params: string) => this.router.navigate(['/home/books/edit/', params])

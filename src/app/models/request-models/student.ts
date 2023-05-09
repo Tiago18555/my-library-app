@@ -14,7 +14,8 @@ interface StudentPostModel {
  */
 
 interface StudentUpdateModel {
-
+  cpf: string,
+  name: string
 }
 
 export {

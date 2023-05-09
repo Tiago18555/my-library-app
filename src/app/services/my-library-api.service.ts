@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { delay, first, tap } from 'rxjs/operators';
+import { catchError, delay, first, tap } from 'rxjs/operators';
 import { AuthRequestModel, ValidateRequestModel } from '../models/request-models/auth';
 import { BookPostModel, BookUpdateModel } from '../models/request-models/book';
 import { AuthResponseModel, ValidateResponseModel } from '../models/response-models/auth';
@@ -186,7 +186,7 @@ export class MyLibraryApiService {
 
   updateStudent(student: StudentUpdateModel): Observable<StudentResponseModelSingle> {
     return this.HttpClient
-      .put<StudentResponseModelSingle>( `${this.BASEURL}student`, student )
+      .put<StudentResponseModelSingle>( `${this.BASEURL}student`, student, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 
@@ -214,7 +214,7 @@ export class MyLibraryApiService {
 
   updateProfessor(professor: ProfessorUpdateModel): Observable<ProfessorResponseModelSingle> {
     return this.HttpClient
-      .put<ProfessorResponseModelSingle>( `${this.BASEURL}professor`, professor )
+      .put<ProfessorResponseModelSingle>( `${this.BASEURL}professor`, professor, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 
@@ -257,8 +257,11 @@ export class MyLibraryApiService {
   VerifyBorrowLimitFromClient(id: String) : Observable<ProfessorResponseModelSingle> {
     return this.HttpClient
       .get<ProfessorResponseModelSingle>( `${this.BASEURL}borrowing/professor/${id}`, this.header )
-      .pipe(delay(this.BASEDELAY), first());
+      .pipe(
+        delay(this.BASEDELAY),
+        first());
   }
+
 
   //LOT OF RESPONSES
   //DoBorrow(id: string) : Observable<>

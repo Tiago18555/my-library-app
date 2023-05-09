@@ -105,6 +105,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/my-library-app",
+            "netlifyToken": "tcajueiro_1995@hotmail.com",
+            "siteId": "4d8d484e-ee60-4903-af6a-a0f2d63efedb"
+          }
         }
       }
     }
