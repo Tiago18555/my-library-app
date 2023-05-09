@@ -12,8 +12,8 @@ import { BorrowingResponseModel } from '../models/response-models/borrowing';
 import { PublisherResponseModel } from '../models/response-models/publisher';
 import { StudentResponseModel, StudentResponseModelSingle } from '../models/response-models/student';
 import { LocalStorageService } from './local-storage.service';
-import { StudentPostModel } from '../models/request-models/student';
-import { ProfessorPostModel } from '../models/request-models/professor';
+import { StudentPostModel, StudentUpdateModel } from '../models/request-models/student';
+import { ProfessorPostModel, ProfessorUpdateModel } from '../models/request-models/professor';
 import { ProfessorResponseModel, ProfessorResponseModelSingle } from '../models/response-models/professor';
 import { ConfigPostModel } from '../models/request-models/config';
 import { ConfigResponseModel, ConfigResponseModelHistory } from '../models/response-models/config';
@@ -184,6 +184,12 @@ export class MyLibraryApiService {
       .pipe(delay(this.BASEDELAY), first());
   }
 
+  updateStudent(student: StudentUpdateModel): Observable<StudentResponseModelSingle> {
+    return this.HttpClient
+      .put<StudentResponseModelSingle>( `${this.BASEURL}student`, student )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
   /**
    * @returns Observable<ProfessorResponseModel>
    */
@@ -203,6 +209,12 @@ export class MyLibraryApiService {
   addProfessor(student: ProfessorPostModel): Observable<ProfessorResponseModelSingle> {
     return this.HttpClient
       .post<ProfessorResponseModelSingle>( `${this.BASEURL}professor/register`, student, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
+
+  updateProfessor(professor: ProfessorUpdateModel): Observable<ProfessorResponseModelSingle> {
+    return this.HttpClient
+      .put<ProfessorResponseModelSingle>( `${this.BASEURL}professor`, professor )
       .pipe(delay(this.BASEDELAY), first());
   }
 

@@ -16,7 +16,11 @@
 		}
 	}
 	form {
-		flex: 0.5;
+		//flex: 0.5;
+    height: fit-content;
+    width: calc(100% - 20px);
+    margin-top: 1em;
+    margin-left: auto;
 		.inputfield {
 			display: flex;
 			flex-direction: row;
@@ -30,5 +34,26 @@
 				margin-bottom: 17px;
 			}
 		}
+	}
+}
+
+table {
+	width: 100%;
+	.col {
+		text-align: center;
+		mat-icon {
+			cursor: pointer;
+			&:hover {
+				color: red;
+			}
+		}
+	}
+}
+
+.link {
+	cursor: pointer;
+	&:hover {
+		//background-color: #f5f5f5;
+		color: red;
 	}
 }

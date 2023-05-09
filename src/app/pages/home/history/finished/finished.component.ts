@@ -34,13 +34,13 @@ export class FinishedComponent implements OnInit {
 
   goToStudentDetails(params: string) : void {
     console.log(params);
-    
+
     this.router.navigate(['/home/students/details/', params]);
   }
 
   goToBookDetails(params: string) : void {
     console.log(params);
-    
+
     this.router.navigate(['/home/books/edit/', params]);
   }
 }

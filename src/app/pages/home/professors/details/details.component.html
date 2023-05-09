@@ -16,6 +16,7 @@
 					matInput
 					placeholder="Nome"
 					[(ngModel)]="professor.data.name"
+          (ngModelChange)="controlEditButton(professor.data)"
 					name ="name"
 					[disabled] = "!enableNameEdit"
 				>
@@ -31,6 +32,7 @@
 					matInput
 					placeholder="Cpf"
 					[(ngModel)]="professor.data.cpf"
+          (ngModelChange)="controlEditButton(professor.data)"
 					name ="cpf"
 					[disabled] = "!enableCpfEdit"
 					>
@@ -39,5 +41,14 @@
 				<mat-icon (click)="toggleEditCpfButtonDisabled()">edit</mat-icon>
 			</button>
 		</div>
+
+    <button
+      mat-button-raised
+      color="primary"
+      type="submit"
+      [disabled]="this.disableEdit"
+      (click)="onSubmit(itemForm)"
+    >Atualizar</button>
+
 	</form>
 </div>

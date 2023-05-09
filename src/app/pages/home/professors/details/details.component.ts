@@ -1,8 +1,13 @@
+import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ProfessorResponseModelSingle } from 'src/app/models/response-models/professor';
+import { ProfessorUpdateModel } from 'src/app/models/request-models/professor';
+import { BorrowingResponseDataModel } from 'src/app/models/response-models/borrowing';
+import { ProfessorResponseDataModel, ProfessorResponseModelSingle } from 'src/app/models/response-models/professor';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-details',
@@ -11,24 +16,34 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 })
 export class DetailsComponent implements OnInit {
 
+  private readonly MINIMUM_NAME_SIZE : number = 3;
+  private readonly MAXIMUM_NAME_SIZE : number = 40;
+
   public cpf = this.router.routerState.snapshot.url.replace('/home/professors/details/', '')
   public response : ProfessorResponseModelSingle = {
     data : {
       id: '',
-      name: ''
+      name: '',
+      cpf: ''
     },
     httpstatus : ''
   };
   public professor$ : Observable<any> = of();
+  public dataSource$ : Observable<any> = of();
+  public dataTableSource : any;
   public showForm : boolean = false;
   public showAddNewBorrow : boolean = false;
 
   public enableNameEdit : boolean = false;
   public enableCpfEdit : boolean = false;
+  public disableEdit : boolean = true;
+
+  public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolver']
 
   constructor(
     private router: Router,
-    private service: MyLibraryApiService
+    private service: MyLibraryApiService,
+    private validate: ValidationService
   ) { }
 
   ngOnInit(): void {
@@ -37,29 +52,26 @@ export class DetailsComponent implements OnInit {
 
   loadProfessor() : void {
     this.professor$ = this.service.getProfessorByCpf(this.cpf)
-    /*this.professor$.subscribe(res => {
+    this.professor$.subscribe(res => {
       this.response = res;
       this.loadBorrowings(res.data.id)
-    })*/
+    })
   }
 
   loadBorrowings(id: String) : void {
-    /*
-    this.service.VerifyBorrowsFromClient(id).subscribe(res => {
-
-      if(res.data.loan && res.data.loan > 0) {
+    this.dataSource$ = this.service.VerifyBorrowLimitFromClient(id)
+    this.dataSource$.subscribe({
+      next: res => {
+        this.dataTableSource = new BorrowingsDataSource(res.data.borrowings)
+        this.showAddNewBorrow = res.data.first?.startsWith('The limit of simultaneous borrowings is')
+        //PADRONIZAR A RESPONSE DA API PARA TRATAMENTO MELHOR NESSE TRECHO
+      },
+      error: err => {
         this.showAddNewBorrow = false;
-
-        ///TODO: trocar esse alert
-        //alert('OPA AI NÃO AMIGO');
+        console.log(err);
       }
-    },
-    err => {
-      //alert('OPA AI SIM AMIGO');
-      this.showAddNewBorrow = true;
-      console.log(err);
     })
-    */
+
   }
 
   toggleEditNameButtonDisabled() : void {
@@ -74,4 +86,88 @@ export class DetailsComponent implements OnInit {
     this.showForm = !this.showForm
   }
 
+  controlEditButton = (params : ProfessorResponseDataModel) => {
+    this.disableEdit = !this.fieldsAreCorrectToUpdate(params);
+  }
+
+  fieldsAreCorrectToUpdate = ({ name, cpf } : ProfessorResponseDataModel) => {
+    return (
+      this.response.data.name != name &&
+      this.response.data.name.length < this.MAXIMUM_NAME_SIZE &&
+      this.response.data.name.length > this.MINIMUM_NAME_SIZE
+    ) || (
+      this.response.data.cpf != cpf &&
+      this.validate.isValidCPF(cpf)
+    )
+  }
+
+  devolution = () : void => console.log("devolution")
+
+  onSubmit = (params: NgForm) : void => {
+
+    const DO_UPDATE = ( professor: ProfessorUpdateModel ) => {
+      console.table(professor)
+      this.service.updateProfessor(professor).subscribe({
+        next: res => {
+          if (res.httpstatus === 'OK') {
+            alert('Dados atualizados com sucesso!')
+            this.loadProfessor()
+          }
+          else if (res.httpstatus !== 'OK') {
+            alert('Erro ao atualizar os dados: ' + res.httpstatus)
+          }
+        },
+        error: err => console.log("error: " + err)
+      })
+    }
+
+    /**
+     * @region essa sequencia de condicionais controlam quais campos serão enviados para a api
+     */
+
+    let { name, cpf } = params.form.value
+    let Name = this.response.data.name
+    let Cpf = this.response.data.cpf
+
+    if (name !== Name && cpf !== Cpf) {
+      DO_UPDATE({
+        Name : name,
+        Cpf : cpf
+      })
+    }
+
+    if (name !== Name) {
+      DO_UPDATE({
+        Name : name,
+        Cpf : Cpf // Same as the database
+      })
+    }
+
+    if (name !== Name) {
+      DO_UPDATE({
+        Name : Name, // Same as the database
+        Cpf : cpf
+      })
+    }
+
+    /**
+     * @endregion
+     */
+  }
+
+  viewBookDetails = (params: string) => this.router.navigate(['/home/books/edit/', params])
+
+}
+
+class BorrowingsDataSource extends DataSource<any> {
+
+  constructor(private source : BorrowingResponseDataModel[]) {
+    super();
+  }
+
+  connect(): Observable<BorrowingResponseDataModel[]> {
+    return of(this.source);
+  }
+
+  disconnect(): void {}
 }

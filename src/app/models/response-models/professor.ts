@@ -16,10 +16,12 @@ interface ProfessorResponseModelSingle {
 interface ProfessorResponseDataModel {
 	id: string;
 	name: string;
-	cpf?: string;
+	cpf: string;
 	loan?: number;
 	books?: BookResponseDataModel[];
 	borrowings?: BorrowingResponseDataModel[];
+  first?: string;
+  second?: ProfessorResponseDataModel;
 }
 
 interface Professor {

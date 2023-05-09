@@ -12,10 +12,11 @@
 
 		<div class="inputfield" *ngIf="student$ | async as student">
 			<mat-form-field>
-				<input 
+				<input
 					matInput
-					placeholder="Nome" 
-					[(ngModel)]="student.data.name" 
+					placeholder="Nome"
+					[(ngModel)]="student.data.name"
+          (ngModelChange)="controlEditButton(student.data)"
 					name ="name"
 					[disabled] = "!enableNameEdit"
 				>
@@ -27,10 +28,11 @@
 
 		<div class="inputfield" *ngIf="student$ | async as student">
 			<mat-form-field>
-				<input 
+				<input
 					matInput
-					placeholder="Cpf" 
-					[(ngModel)]="student.data.cpf" 
+					placeholder="Cpf"
+					[(ngModel)]="student.data.cpf"
+          (ngModelChange)="controlEditButton(student.data)"
 					name ="cpf"
 					[disabled] = "!enableCpfEdit"
 					>
@@ -38,19 +40,60 @@
 			<button>
 				<mat-icon (click)="toggleEditCpfButtonDisabled()">edit</mat-icon>
 			</button>
-		</div>	
-		
+		</div>
+
 		<div class="inputfield" *ngIf="student$ | async as student">
 			<mat-form-field>
-				<input 
+				<input
 					matInput
-					placeholder="Multa acumulada" 
-					[(ngModel)]="student.data.loan" 
+					placeholder="Multa acumulada"
+					[(ngModel)]="student.data.loan"
 					name ="loan"
 					[disabled] = "true"
 					readonly = true
 				>
-				</mat-form-field>
+      </mat-form-field>
+      <button
+        mat-button-raised
+        color="primary"
+				type="submit"
+        [disabled]="this.disableEdit"
+        (click)="onSubmit(itemForm)"
+      >Atualizar</button>
 		</div>
 	</form>
+
+  <div *ngIf="dataSource$ | async as dataSource; else loading">
+    <table mat-table [dataSource]="dataTableSource">
+
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef>Título</th>
+        <td mat-cell *matCellDef="let element" class="link" (click)="viewBookDetails(element.unit.book.title)">{{element.unit.book.title}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="autor">
+        <th class="col" mat-header-cell *matHeaderCellDef>Autor</th>
+        <td class="col" mat-cell *matCellDef="let element">{{element.unit.book.author.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th class="col" mat-header-cell *matHeaderCellDef>Data do empréstimo</th>
+        <td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date:'mediumDate':'':'pt-BR'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="devolver">
+        <th class="col" mat-header-cell *matHeaderCellDef>Devolver</th>
+        <td class="col" mat-cell *matCellDef="let element"><button mat-button-raised (click)="devolution()">Devolver</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <ng-template class="container" #loading>
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
