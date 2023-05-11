@@ -60,8 +60,14 @@
 		</div>
 	</form>
 
+  <button
+    mat-button-raised
+    [disabled]="this.showAddNewBorrow"
+    (click)="borrow()"
+  > + </button>
+
   <div *ngIf="dataSource$ | async as dataSource; else loading">
-    <table mat-table [dataSource]="dataTableSource">
+    <table mat-table [dataSource]="this.dataTableSource">
 
       <ng-container matColumnDef="titulo">
         <th mat-header-cell *matHeaderCellDef>Título</th>
@@ -78,13 +84,23 @@
         <td class="col" mat-cell *matCellDef="let element">{{element.startsAt | date:'mediumDate':'':'pt-BR'}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="devolucao">
+        <th class="col" mat-header-cell *matHeaderCellDef>Data de devolução</th>
+        <td class="col" mat-cell *matCellDef="let element">{{element.endsAt | date:'mediumDate':'':'pt-BR'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="prazo">
+        <th class="col" mat-header-cell *matHeaderCellDef>Prazo</th>
+        <td class="col" mat-cell *matCellDef="let element">{{element.deadLine | date:'mediumDate':'':'pt-BR'}}</td>
+      </ng-container>
+
       <ng-container matColumnDef="devolver">
         <th class="col" mat-header-cell *matHeaderCellDef>Devolver</th>
-        <td class="col" mat-cell *matCellDef="let element"><button mat-button-raised (click)="devolution()">Devolver</button></td>
+        <td class="col" mat-cell *matCellDef="let element"><button mat-button-raised (click)="devolution(element)" [disabled]="enableDevolution(element)">Devolver</button></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"></tr>
     </table>
   </div>
 

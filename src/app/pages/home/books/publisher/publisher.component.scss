@@ -7,10 +7,16 @@ table {
 
 		mat-icon {
 			cursor: pointer;
-			
+
 			&:hover {
 				color: red;
 			}
 		}
 	}
+  .row {
+    &:hover {
+      background-color: #d3d3d3;
+      cursor: pointer;
+    }
+  }
 }

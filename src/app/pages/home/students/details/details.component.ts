@@ -38,7 +38,7 @@ export class DetailsComponent implements OnInit {
   public enableNameEdit : boolean = false;
   public disableEdit : boolean = true;
 
-  public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolver']
+  public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolucao', 'prazo', 'devolver']
 
 
   constructor(
@@ -83,7 +83,7 @@ export class DetailsComponent implements OnInit {
     this.enableNameEdit = !this.enableNameEdit
   }
 
-  toggleShowForm() : void {
+  toggleShowForm = () : void => {
     this.showForm = !this.showForm
   }
 
@@ -99,7 +99,34 @@ export class DetailsComponent implements OnInit {
     )
   }
 
-  devolution = () : void => console.log("devolution")
+  enableDevolution = (params: any) => {
+    return params.endsAt !== null;
+  }
+
+  borrow = () => {console.log('borrow')}
+
+  devolution = ({unit}: any) : void => {
+
+    //Just to keep this project pattern...
+    const DO_DEVOLUTION = ( ibsn: string, id: string ) => {
+      this.service.DoDevolution(id, { ibsn: ibsn }).subscribe({
+        next: res => {
+          if (res.httpstatus === 'CREATED') {
+            alert('Devolução realizada com sucesso!')
+            this.loadStudent()
+          }
+          if (res.httpstatus !== 'CREATED') {
+            alert('Erro na operação: ' + res.httpstatus)
+          }
+        },
+        error: err => console.log(err)
+      })
+    }
+
+    DO_DEVOLUTION(unit.ibsn, this.response.data.id);
+
+    this.loadStudent();
+  }
 
   onSubmit = (params: NgForm) : void => {
 

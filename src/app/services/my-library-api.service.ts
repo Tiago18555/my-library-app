@@ -17,6 +17,12 @@ import { ProfessorPostModel, ProfessorUpdateModel } from '../models/request-mode
 import { ProfessorResponseModel, ProfessorResponseModelSingle } from '../models/response-models/professor';
 import { ConfigPostModel } from '../models/request-models/config';
 import { ConfigResponseModel, ConfigResponseModelHistory } from '../models/response-models/config';
+import { BorrowingPatchModel } from '../models/request-models/borrowing';
+
+interface NoDataResponse {
+  httpstatus: string;
+	token?: string;
+}
 
 
 @Injectable({
@@ -262,10 +268,17 @@ export class MyLibraryApiService {
         first());
   }
 
+  DoDevolution(clientId: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
+    return this.HttpClient
+      .patch<NoDataResponse>( `${this.BASEURL}borrowing/${clientId}`, ibsn, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
 
-  //LOT OF RESPONSES
-  //DoBorrow(id: string) : Observable<>
-  //DoDevolution
+  DoBorrow(clientId: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
+    return this.HttpClient
+      .post<NoDataResponse>( `${this.BASEURL}borrowing/${clientId}`, ibsn, this.header )
+      .pipe(delay(this.BASEDELAY), first());
+  }
 
   /**
    * @returns Observable<ConfigResponseModel>

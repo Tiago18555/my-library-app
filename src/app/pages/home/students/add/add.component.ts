@@ -55,7 +55,7 @@ export class AddComponent implements OnInit {
 
   onSubmit() : void {
     const STUDENT : StudentPostModel = {
-      cpf : this.formFields.cpf.replace('-', '').replace('/', '').replace('.', '').replace('.', ''),
+      cpf : this.srv.cleanCpf(this.formFields.cpf),
       name : this.formFields.name
     }
 

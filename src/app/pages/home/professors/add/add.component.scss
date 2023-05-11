@@ -1,0 +1,26 @@
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 2em;
+
+	mat-form-field {
+
+		textarea {
+			height: 10em;
+			resize: vertical;
+		}
+	}
+
+  mat-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+    button{
+      flex: 1;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+}
