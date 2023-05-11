@@ -63,7 +63,7 @@ onSubmit() : void {
 
 
 
-  this.service.addStudent(PROFESSOR).subscribe({
+  this.service.addProfessor(PROFESSOR).subscribe({
     next : res => {
     if (res.httpstatus === 'CREATED') {
       alert('Professor cadastrado com sucesso!')

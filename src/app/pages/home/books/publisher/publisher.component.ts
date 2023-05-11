@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable, of } from 'rxjs';
 import { PublisherResponseDataModel } from 'src/app/models/response-models/publisher';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
@@ -14,6 +15,8 @@ export class PublisherComponent implements OnInit {
   public displayedColumns: string[] = ['nome', 'cnpj', 'edit']
   public dataTableSource : any
   public dataSource$ : Observable<any> = of([])
+  public keyword: string = ''
+
 
   constructor(
     private service : MyLibraryApiService
@@ -23,23 +26,14 @@ export class PublisherComponent implements OnInit {
     this.loadPublishers()
   }
 
+  applyFilter = ($event: string) =>  {
+    this.dataTableSource.filter = $event.trim().toLowerCase()
+  }
+
   loadPublishers() : void {
     this.dataSource$ = this.service.listAllPublishers()
     this.dataSource$.subscribe(res =>
-      this.dataTableSource = new PublishersDataSource(res.data)
+      this.dataTableSource = new MatTableDataSource<PublisherResponseDataModel>(res.data)
     );
   }
-}
-
-class PublishersDataSource extends DataSource<any> {
-
-  constructor(private source : PublisherResponseDataModel[]) {
-    super();
-  }
-
-  connect(): Observable<PublisherResponseDataModel[]> {
-    return of(this.source);
-  }
-
-  disconnect(): void {}
 }

@@ -1,4 +1,9 @@
-<div *ngIf="dataSource$ | async as dataSource; else loading">
+<div *ngIf="dataSource$ | async as dataSource; else loading" class="container">
+
+  <mat-form-field class="filter">
+    <input matInput (ngModelChange)="applyFilter($event)" [(ngModel)]="this.keyword" placeholder="Pesquisa">
+  </mat-form-field>
+
 	<table mat-table [dataSource]="dataTableSource">
 
 		<ng-container matColumnDef="nome">

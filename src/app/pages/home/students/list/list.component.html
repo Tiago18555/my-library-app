@@ -5,6 +5,10 @@
       </mat-card-content>
   </mat-card>
 
+  <mat-form-field class="filter">
+    <input matInput (ngModelChange)="applyFilter($event)" [(ngModel)]="this.keyword" placeholder="Pesquisa">
+  </mat-form-field>
+
 	<table mat-table [dataSource]="dataTableSource">
 
     <ng-container matColumnDef="nome">

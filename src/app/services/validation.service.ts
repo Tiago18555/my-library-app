@@ -11,7 +11,7 @@ export class ValidationService {
     let output : string = cpf
 
     while(output.includes('.'))
-      output = cpf.replace('.', '')
+      output = output.replace('.', '')
 
     while(output.includes('-'))
       output = output.replace('-', '')

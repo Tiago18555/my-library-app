@@ -1,11 +1,12 @@
-import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 interface Student {
   id: string;
+  name: string;
   cpf: string;
 }
 
@@ -17,8 +18,9 @@ interface Student {
 export class ListComponent implements OnInit {
 
   public displayedColumns: string[] = ['nome', 'cpf']
-  public dataTableSource : any
+  public dataTableSource : MatTableDataSource<Student> = new MatTableDataSource()
   public dataSource$ : Observable<any> = of([])
+  public keyword: string = '';
 
   constructor(
     private service : MyLibraryApiService,
@@ -29,6 +31,10 @@ export class ListComponent implements OnInit {
     this.loadStudents()
   }
 
+  applyFilter = ($event: string) =>  {
+    this.dataTableSource.filter = $event.trim().toLowerCase()
+  }
+
   addStudent(){
     this.router.navigate(['home/students/add']);
   }
@@ -36,7 +42,7 @@ export class ListComponent implements OnInit {
   loadStudents() : void {
     this.dataSource$ = this.service.loadStudents()
     this.dataSource$.subscribe(res =>
-      this.dataTableSource = new StudentsDataSource(res.data)
+      this.dataTableSource = new MatTableDataSource<Student>(res.data)
     );
   }
 
@@ -45,15 +51,3 @@ export class ListComponent implements OnInit {
   }
 }
 
-class StudentsDataSource extends DataSource<any> {
-
-  constructor(private source : Student[]) {
-    super();
-  }
-
-  connect(): Observable<Student[]> {
-    return of(this.source);
-  }
-
-  disconnect(): void {}
-}

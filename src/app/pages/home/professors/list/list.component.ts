@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 import { Observable, of } from 'rxjs';
-import { DataSource } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface Professor {
   id: string;
+  name: string;
   cpf: string;
 }
 
@@ -17,8 +18,9 @@ interface Professor {
 export class ListComponent implements OnInit {
 
   public displayedColumns: string[] = ['nome', 'cpf']
-  public dataTableSource : any
+  public dataTableSource: MatTableDataSource<Professor> = new MatTableDataSource()
   public dataSource$ : Observable<any> = of([])
+  public keyword: string = '';
 
   constructor(
     private service : MyLibraryApiService,
@@ -29,6 +31,10 @@ export class ListComponent implements OnInit {
     this.loadProfessors()
   }
 
+  applyFilter = ($event: string) =>  {
+    this.dataTableSource.filter = $event.trim().toLowerCase()
+  }
+
   addProfessor(){
     this.router.navigate(['home/professors/add']);
   }
@@ -36,25 +42,10 @@ export class ListComponent implements OnInit {
   loadProfessors() : void {
     this.dataSource$ = this.service.loadProfessors()
     this.dataSource$.subscribe(res =>
-      this.dataTableSource = new ProfessorsDataSource(res.data)
-    );
+      this.dataTableSource = new MatTableDataSource<Professor>(res.data))
   }
 
   viewDetails(row: Professor) : void {
     this.router.navigate(['home/professors/details/' + row.cpf]);
   }
-
-}
-
-class ProfessorsDataSource extends DataSource<any> {
-
-  constructor(private source : Professor[]) {
-    super();
-  }
-
-  connect(): Observable<Professor[]> {
-    return of(this.source);
-  }
-
-  disconnect(): void {}
 }
