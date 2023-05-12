@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from 'src/app/shared/app-material/app-material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProfessorsComponent } from './professors.component';
+import { BorrowComponent } from './borrow/borrow.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProfessorsComponent } from './professors.component';
     AddComponent,
     DetailsComponent,
     ListComponent,
-    ProfessorsComponent
+    ProfessorsComponent,
+    BorrowComponent
   ],
   imports: [
     CommonModule,

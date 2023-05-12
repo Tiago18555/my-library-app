@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StudentsComponent } from './students.component';
 import { AddComponent } from './add/add.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { BorrowComponent } from './borrow/borrow.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
     ListComponent,
     StudentsComponent,
     AddComponent,
+    BorrowComponent,
   ],
   imports: [
     CommonModule,

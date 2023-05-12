@@ -3,7 +3,8 @@
  * @description Interface que representa a requisição para a API de cadastro de livros
  */
 interface BorrowingPatchModel {
-  ibsn: string
+  title?: string
+  ibsn?: string
 }
 
 export {

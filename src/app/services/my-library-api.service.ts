@@ -21,6 +21,7 @@ import { BorrowingPatchModel } from '../models/request-models/borrowing';
 
 interface NoDataResponse {
   httpstatus: string;
+  data?: any;
 	token?: string;
 }
 

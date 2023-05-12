@@ -103,7 +103,9 @@ export class DetailsComponent implements OnInit {
     return params.endsAt !== null;
   }
 
-  borrow = () => {console.log('borrow')}
+  borrow = () => {
+    this.router.navigate(['home/students/borrow/' + this.response.data.id]);
+  }
 
   devolution = ({unit}: any) : void => {
 

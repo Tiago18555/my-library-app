@@ -9,6 +9,7 @@ import { DetailsComponent } from './details/details.component';
 import { AddComponent } from './add/add.component';
 import { HistoryComponent } from '../history/history.component';
 import { BooksComponent } from '../books/books.component';
+import { BorrowComponent } from './borrow/borrow.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,10 @@ const routes: Routes = [
           {
             path: 'add',
             component: AddComponent
+          },
+          {
+            path: 'borrow/:id',
+            component: BorrowComponent
           }
         ]
       },
