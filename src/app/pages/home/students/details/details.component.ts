@@ -104,18 +104,17 @@ export class DetailsComponent implements OnInit {
   }
 
   borrow = () => {
-    this.router.navigate(['home/students/borrow/' + this.response.data.id]);
+    this.router.navigate(['home/students/borrow/' + this.response.data.cpf]);
   }
 
   devolution = ({unit}: any) : void => {
 
     //Just to keep this project pattern...
-    const DO_DEVOLUTION = ( ibsn: string, id: string ) => {
-      this.service.DoDevolution(id, { ibsn: ibsn }).subscribe({
+    const DO_DEVOLUTION = ( ibsn: string, cpf: string ) => {
+      this.service.DoDevolution(cpf, { ibsn: ibsn }).subscribe({
         next: res => {
           if (res.httpstatus === 'CREATED') {
             alert('Devolução realizada com sucesso!')
-            this.loadStudent()
           }
           if (res.httpstatus !== 'CREATED') {
             alert('Erro na operação: ' + res.httpstatus)
@@ -125,7 +124,7 @@ export class DetailsComponent implements OnInit {
       })
     }
 
-    DO_DEVOLUTION(unit.ibsn, this.response.data.id);
+    DO_DEVOLUTION(unit.ibsn, this.cpf);
 
     this.loadStudent();
   }

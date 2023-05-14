@@ -12,7 +12,7 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 })
 export class BorrowComponent implements OnInit {
 
-  public id = this.router.routerState.snapshot.url.replace('/home/students/borrow/', '')
+  public cpf = this.router.routerState.snapshot.url.replace('/home/students/borrow/', '')
 
   public displayedColumns: string[] = ['titulo', 'autor', 'editora', 'quantidade', 'borrow']
   public dataTableSource : any
@@ -40,12 +40,16 @@ export class BorrowComponent implements OnInit {
   borrow(title: string) {
     console.log(title);
 
-    const DO_BORROW = (id: string, title: string) => {
+    const DO_BORROW = (cpf: string, title: string) => {
 
-      this.service.DoBorrow(id, { title: title }).subscribe({
+      this.service.DoBorrow(cpf, { title: title }).subscribe({
         next: res => {
-          if(res.httpstatus == 'CREATED')
-            alert(`empréstimo realizado com sucesso. \nIBSN : ${res.data.ibsn}`)
+          if(res.httpstatus == 'CREATED') {
+            alert(`empréstimo realizado com sucesso. \nIBSN : ${res.data.first.unit.ibsn}`)
+            this.router.navigate(['/home/students/details/' + this.cpf])
+          } else {
+            alert('Erro na operação: ' + res.httpstatus)
+          }
         },
         error: err => {
             console.log(err);
@@ -53,7 +57,7 @@ export class BorrowComponent implements OnInit {
       })
     }
 
-    DO_BORROW(this.id, title);
+    DO_BORROW(this.cpf, title);
 
     this.loadBooks();
   }

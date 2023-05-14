@@ -51,9 +51,12 @@ export class DetailsComponent implements OnInit {
 
   loadProfessor() : void {
     this.professor$ = this.service.getProfessorByCpf(this.cpf)
-    this.professor$.subscribe(res => {
-      this.response = res;
-      this.loadBorrowings(res.data.id)
+    this.professor$.subscribe({
+      next : res => {
+        this.response = res;
+        this.loadBorrowings(res.data.id)
+    },
+      error: err => console.log(err)
     })
   }
 
@@ -93,7 +96,35 @@ export class DetailsComponent implements OnInit {
     )
   }
 
-  devolution = () : void => console.log("devolution")
+  enableDevolution = (params: any) => {
+    return params.endsAt !== null;
+  }
+
+  borrow = () => {
+    this.router.navigate(['home/professors/borrow/' + this.response.data.cpf]);
+  }
+
+  devolution = ({unit}: any) : void => {
+
+    //Just to keep this project pattern...
+    const DO_DEVOLUTION = ( ibsn: string, id: string ) => {
+      this.service.DoDevolution(id, { ibsn: ibsn }).subscribe({
+        next: res => {
+          if (res.httpstatus === 'CREATED') {
+            alert('Devolução realizada com sucesso!')
+          }
+          if (res.httpstatus !== 'CREATED') {
+            alert('Erro na operação: ' + res.httpstatus)
+          }
+        },
+        error: err => console.log(err)
+      })
+    }
+
+    DO_DEVOLUTION(unit.ibsn, this.response.data.id);
+
+    this.loadProfessor();
+  }
 
   onSubmit = (params: NgForm) : void => {
 
@@ -109,7 +140,7 @@ export class DetailsComponent implements OnInit {
             alert('Erro ao atualizar os dados: ' + res.httpstatus)
           }
         },
-        error: err => console.log("error: " + err)
+        error: err => console.log(err)
       })
     }
 

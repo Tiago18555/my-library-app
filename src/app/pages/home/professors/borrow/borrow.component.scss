@@ -1,0 +1,30 @@
+table {
+	width: 100%;
+	.col {
+		text-align: center;
+		mat-icon {
+			cursor: pointer;
+      color: #1a581a;
+			&:hover {
+				color: red;
+			}
+		}
+	}
+  .row {
+    &:hover {
+      background-color: #d3d3d3;
+      cursor: pointer;
+    }
+  }
+}
+
+.filter {
+  width: 90%;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

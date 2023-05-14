@@ -269,15 +269,15 @@ export class MyLibraryApiService {
         first());
   }
 
-  DoDevolution(clientId: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
+  DoDevolution(cpf: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
     return this.HttpClient
-      .patch<NoDataResponse>( `${this.BASEURL}borrowing/${clientId}`, ibsn, this.header )
+      .patch<NoDataResponse>( `${this.BASEURL}borrowing/${cpf}`, ibsn, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 
-  DoBorrow(clientId: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
+  DoBorrow(cpf: string, ibsn: BorrowingPatchModel) : Observable<NoDataResponse> {
     return this.HttpClient
-      .post<NoDataResponse>( `${this.BASEURL}borrowing/${clientId}`, ibsn, this.header )
+      .post<NoDataResponse>( `${this.BASEURL}borrowing/${cpf}`, ibsn, this.header )
       .pipe(delay(this.BASEDELAY), first());
   }
 

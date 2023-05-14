@@ -40,6 +40,6 @@ export class ListComponent implements OnInit {
   edit(title: string) {
     console.log(title);
 
-    this.router.navigate(['/home/books/edit/',  title ]);
+    this.router.navigate(['/home/books/edit/',  title]);
   }
 }
