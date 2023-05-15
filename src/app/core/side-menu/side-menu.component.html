@@ -1,0 +1,19 @@
+<mat-card class="side-menu responsive-sidebar" [ngClass]="{'show': menuState}">
+
+  <span class="unselectable">
+    MENU
+  </span>
+
+  <ul class="unselectable">
+    <li>ADICIONAR</li>
+    <li>CONFIGURAÇÕES</li>
+    <li>EXCLUIR/RESTAURAR</li>
+    <li>SOBRE</li>
+  </ul>
+
+  <button  mat-raised-button color="secondary"  mat-icon-button (click)="hideMenu()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+</mat-card>
+
+<div class="overlay" *ngIf="menuState" (click)="hideMenu()"></div>

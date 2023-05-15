@@ -22,10 +22,10 @@ registerLocaleData(localePT);
     /* APP-MODULES  */
     LoginScreenModule,
     HomeModule,
-    
+
     /* ROUTING-MODULES */
     AppRoutingModule,
-    
+
     /* ANGULAR-MODULES */
     AppMaterialModule,
     CommonModule,

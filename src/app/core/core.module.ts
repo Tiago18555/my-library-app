@@ -5,13 +5,15 @@ import { FooterComponent } from './footer/footer.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { HomeRoutingModule } from '../pages/home/home-routing.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SideMenuComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SideMenuComponent
   ]
 })
 export class CoreModule { }

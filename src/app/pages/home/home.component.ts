@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,14 +9,16 @@ import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 export class HomeComponent implements OnInit {
 
   public username : string = ''
+  public menuState : boolean = false
 
   constructor(
     private storage : LocalStorageService
   ) { }
 
+  showMenu = ($state: boolean): boolean => this.menuState = $state
 
   ngOnInit(): void {
-    this.username = this.storage.getString('session');   
+    this.username = this.storage.getString('session');
   }
 
 }

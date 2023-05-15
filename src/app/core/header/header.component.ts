@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   public AcervoIsActive : boolean = this.router.routerState.snapshot.url.startsWith('/home/books')
   public RegistroIsActive : boolean = this.router.routerState.snapshot.url.startsWith('/home/history')
 
+  @Output() onChangeMenuState: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private storage : LocalStorageService,
@@ -35,12 +36,14 @@ export class HeaderComponent implements OnInit {
     this.username = helper.decodeToken(this.token).sub;
     console.log('reload');
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;    
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   logout() : void {
     this.service.logout()
   }
 
-
+  showMenu() : void {
+    this.onChangeMenuState.emit(true)
+  }
 }

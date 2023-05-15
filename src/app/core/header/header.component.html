@@ -1,7 +1,7 @@
 <header>
 
 	  <mat-toolbar color="primary" class="app-mat-toolbar">
-		<button mat-raised-button color="secondary"  mat-icon-button class="active">
+		<button mat-raised-button color="secondary"  mat-icon-button class="active" (click)="showMenu()">
 		  <mat-icon>menu</mat-icon>
 		</button>
 		<span>Bem vindo {{username | uppercase}}.</span>

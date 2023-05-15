@@ -32,12 +32,12 @@ export class DetailsComponent implements OnInit {
   public dataSource$ : Observable<any> = of();
   public dataTableSource : any;
   public showForm : boolean = false;
-  public showAddNewBorrow : boolean = false;
+  public hideAddNewBorrow : boolean = false;
 
   public enableNameEdit : boolean = false;
   public disableEdit : boolean = true;
 
-  public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolver']
+  public displayedColumns: string[] = ['titulo', 'autor', 'data', 'devolucao', 'prazo', 'devolver']
 
   constructor(
     private router: Router,
@@ -64,12 +64,12 @@ export class DetailsComponent implements OnInit {
     this.dataSource$ = this.service.VerifyBorrowLimitFromClient(id)
     this.dataSource$.subscribe({
       next: res => {
-        this.dataTableSource = new BorrowingsDataSource(res.data.borrowings)
-        this.showAddNewBorrow = res.data.first?.startsWith('The limit of simultaneous borrowings is')
+        this.dataTableSource = new BorrowingsDataSource(res.data.second)
+        this.hideAddNewBorrow = !res.data.first?.startsWith('The limit of simultaneous borrowings is')
         //PADRONIZAR A RESPONSE DA API PARA TRATAMENTO MELHOR NESSE TRECHO
       },
       error: err => {
-        this.showAddNewBorrow = false;
+        this.hideAddNewBorrow = true;
         console.log(err);
       }
     })
@@ -107,8 +107,8 @@ export class DetailsComponent implements OnInit {
   devolution = ({unit}: any) : void => {
 
     //Just to keep this project pattern...
-    const DO_DEVOLUTION = ( ibsn: string, id: string ) => {
-      this.service.DoDevolution(id, { ibsn: ibsn }).subscribe({
+    const DO_DEVOLUTION = ( ibsn: string, cpf: string ) => {
+      this.service.DoDevolution(cpf, { ibsn: ibsn }).subscribe({
         next: res => {
           if (res.httpstatus === 'CREATED') {
             alert('Devolução realizada com sucesso!')
@@ -121,7 +121,7 @@ export class DetailsComponent implements OnInit {
       })
     }
 
-    DO_DEVOLUTION(unit.ibsn, this.response.data.id);
+    DO_DEVOLUTION(unit.ibsn, this.cpf);
 
     this.loadProfessor();
   }

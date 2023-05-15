@@ -45,7 +45,7 @@ export class BorrowComponent implements OnInit {
       this.service.DoBorrow(cpf, { title: title }).subscribe({
         next: res => {
           if(res.httpstatus == 'CREATED') {
-            alert(`empréstimo realizado com sucesso. \nIBSN : ${res.data.first.unit.ibsn}`)
+            alert(`empréstimo realizado com sucesso. \nIBSN : ${res.data.unit.ibsn}`)
             this.router.navigate(['/home/students/details/' + this.cpf])
           } else {
             alert('Erro na operação: ' + res.httpstatus)
