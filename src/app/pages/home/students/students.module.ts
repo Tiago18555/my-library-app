@@ -12,6 +12,7 @@ import { StudentsComponent } from './students.component';
 import { AddComponent } from './add/add.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { BorrowComponent } from './borrow/borrow.component';
+import { DeleteRestoreComponent } from './delete-restore/delete-restore.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { BorrowComponent } from './borrow/borrow.component';
     StudentsComponent,
     AddComponent,
     BorrowComponent,
+    DeleteRestoreComponent,
   ],
   imports: [
     CommonModule,

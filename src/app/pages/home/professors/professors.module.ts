@@ -12,6 +12,7 @@ import { AppMaterialModule } from 'src/app/shared/app-material/app-material.modu
 import { BrowserModule } from '@angular/platform-browser';
 import { ProfessorsComponent } from './professors.component';
 import { BorrowComponent } from './borrow/borrow.component';
+import { DeleteRestoreComponent } from './delete-restore/delete-restore.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { BorrowComponent } from './borrow/borrow.component';
     DetailsComponent,
     ListComponent,
     ProfessorsComponent,
-    BorrowComponent
+    BorrowComponent,
+    DeleteRestoreComponent
   ],
   imports: [
     CommonModule,
