@@ -1,1 +1,95 @@
-<p>rules works!</p>
+<mat-card class="responsive-container main-container">
+
+  <mat-card-title class="title">CONFIGURAÇÃO ATUAL</mat-card-title>
+
+  <form action="post" #itemForm="ngForm">
+
+    <div class="inputfield unselectable" *ngIf="formFields$ | async as formFields">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Data de início"
+          name ="startedAt"
+          [disabled] = "true"
+        >
+        {{this.currentConfig.startedAt | date:'mediumDate':'':'pt-BR'}}
+      </mat-form-field>
+    </div>
+
+    <div class="inputfield" *ngIf="formFields$ | async as formFields">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Tempo de tolerância"
+          [(ngModel)]="this.currentConfig.tolerance"
+          name ="tolerance"
+          (ngModelChange)="controlSubmit(this.currentConfig)"
+          [disabled] = !this.enableToleranceEdit
+          type = number
+        >
+      </mat-form-field>
+      <button>
+        <mat-icon (click)="toggleEditToleranceButtonDisabled()">edit</mat-icon>
+      </button>
+    </div>
+
+    <div class="inputfield" *ngIf="formFields$ | async as formFields">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Multa"
+          [(ngModel)]="this.currentConfig.assessment"
+          name ="assessment"
+          (ngModelChange)="controlSubmit(this.currentConfig)"
+          [disabled] = !this.enableAssessmentEdit
+          type = number
+        >
+      </mat-form-field>
+      <button>
+        <mat-icon (click)="toggleEditAssessmentButtonDisabled()">edit</mat-icon>
+      </button>
+    </div>
+
+
+
+    <div class="inputfield" *ngIf="formFields$ | async as formFields">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Limite de empréstimo (professores)"
+          [(ngModel)]="this.currentConfig.borrowingLimit"
+          name ="borrowingLimit"
+          (ngModelChange)="controlSubmit(this.currentConfig)"
+          [disabled] = !this.enableBLimitEdit
+          type = number
+        >
+      </mat-form-field>
+      <button>
+        <mat-icon (click)="toggleEditBLimitButtonDisabled()">edit</mat-icon>
+      </button>
+    </div>
+
+
+    <mat-card >
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onCancel()"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit(itemForm)"
+        [disabled]="this.disableSubmit"
+      >
+        Salvar
+      </button>
+    </mat-card>
+
+  </form>
+</mat-card>
+

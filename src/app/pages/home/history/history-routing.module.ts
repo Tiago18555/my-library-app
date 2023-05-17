@@ -11,24 +11,41 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { FinishedComponent } from './finished/finished.component';
 import { HistoryComponent } from './history.component';
 import { UnfinishedComponent } from './unfinished/unfinished.component';
+import { ConfigsComponent } from '../configs/configs.component';
+import { RulesComponent } from '../configs/rules/rules.component';
 
 const routes: Routes = [
-  { 
-    path: 'home', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard], 
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
-      { 
-        path: '', 
-        redirectTo: 'welcome', 
-        pathMatch: 'full' 
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full'
       },
-      { 
-        path: 'welcome', 
+      {
+        path: 'welcome',
         component: WelcomeComponent
       },
-      { 
-        path: 'students', 
+      {
+        path: 'configs',
+        component: ConfigsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'rules',
+            pathMatch: 'full'
+          },
+          {
+            path: 'rules',
+            component: RulesComponent
+          }
+        ]
+      },
+      {
+        path: 'students',
         component: StudentsComponent,
         children: [
           {
@@ -37,12 +54,12 @@ const routes: Routes = [
           }
         ]
       },
-      { 
-        path: 'professors', 
+      {
+        path: 'professors',
         component: ProfessorsComponent
       },
-      { 
-        path: 'history', 
+      {
+        path: 'history',
         component: HistoryComponent,
         children: [
           {
@@ -60,8 +77,8 @@ const routes: Routes = [
           },
         ]
       },
-      { 
-        path: 'books', 
+      {
+        path: 'books',
         component: BooksComponent,
         children: [
           {
@@ -70,7 +87,7 @@ const routes: Routes = [
           }
         ]
       }
-    ] 
+    ]
   }
 ];
 

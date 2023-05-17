@@ -11,6 +11,8 @@ import { StudentsComponent } from './students/students.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ListComponent as PListComponent } from './professors/list/list.component';
 import { DetailsComponent as PDetailsComponent } from './professors/details/details.component';
+import { ConfigsComponent } from './configs/configs.component';
+import { RulesComponent } from './configs/rules/rules.component';
 
 const routes: Routes = [
   {
@@ -72,7 +74,22 @@ const routes: Routes = [
 		{
 			path: 'books',
 			component: BooksComponent
-		}
+		},
+    {
+      path: 'configs',
+      component: ConfigsComponent,
+      children: [
+        {
+          path: '',
+          redirectTo: 'rules',
+          pathMatch: 'full'
+        },
+        {
+          path: 'rules',
+          component: RulesComponent
+        }
+      ]
+    }
   ] }
 ];
 

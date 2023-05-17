@@ -11,15 +11,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StudentsModule } from './students/students.module';
 import { HistoryModule } from './history/history.module';
 import { ProfessorsModule } from './professors/professors.module';
-import { ConfigsComponent } from './configs/configs.component';
+import { ConfigsModule } from './configs/configs.module';
 
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    WelcomeComponent,
-    ConfigsComponent
+    WelcomeComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +31,7 @@ import { ConfigsComponent } from './configs/configs.component';
     ProfessorsModule,
     HistoryModule,
     BrowserModule,
+    ConfigsModule
   ],
   exports: [
     HomeComponent,

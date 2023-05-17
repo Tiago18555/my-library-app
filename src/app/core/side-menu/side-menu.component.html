@@ -5,13 +5,13 @@
   </span>
 
   <ul class="unselectable">
-    <li>ADICIONAR</li>
-    <li>CONFIGURAÇÕES</li>
-    <li>EXCLUIR/RESTAURAR</li>
+    <li [routerLink]="['welcome']">ADICIONAR</li>
+    <li [routerLink]="['configs/rules']">CONFIGURAÇÕES</li>
+    <li [routerLink]="['students/delete-restore']">RESTAURAR</li>
     <li>SOBRE</li>
   </ul>
 
-  <button  mat-raised-button color="secondary"  mat-icon-button (click)="hideMenu()">
+  <button mat-raised-button color="secondary" mat-icon-button (click)="hideMenu()">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
 </mat-card>

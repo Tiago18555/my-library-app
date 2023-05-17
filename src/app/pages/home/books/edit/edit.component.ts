@@ -8,8 +8,8 @@ import { BookResponseDataModel } from 'src/app/models/response-models/book';
 import { MyLibraryApiService } from 'src/app/services/my-library-api.service';
 
 interface SelectOutput {
-  name: string;
-  id: string;
+  name: string,
+  id: string
 }
 
 @Component({
@@ -198,14 +198,12 @@ export class EditComponent implements OnInit {
 
   selectUnit(ev: any) : void {
 
-
-
     if (ev.srcElement.parentElement.classList.contains("selected")) {
       ev.srcElement.parentElement.classList.add("unselected")
       ev.srcElement.parentElement.classList.remove("selected")
     } else {
       ev.srcElement.parentElement.classList.add("selected")
-      ev.srcElement.parentElement.classList.remove("un0selected")
+      ev.srcElement.parentElement.classList.remove("unselected")
     }
 
     this.unitIsSelected = !this.unitIsSelected

@@ -12,37 +12,54 @@ import { BooksComponent } from './books.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { PublisherComponent } from './publisher/publisher.component';
+import { ConfigsComponent } from '../configs/configs.component';
+import { RulesComponent } from '../configs/rules/rules.component';
 
 
 const routes: Routes = [
-  { 
-    path: 'home', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard], 
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
-      { 
-        path: '', 
-        redirectTo: 'welcome', 
-        pathMatch: 'full' 
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full'
       },
-      { 
-        path: 'welcome', 
-        component: WelcomeComponent 
+      {
+        path: 'welcome',
+        component: WelcomeComponent
       },
-      { 
-        path: 'students', 
+      {
+        path: 'students',
         component: StudentsComponent
       },
-      { 
-        path: 'professors', 
+      {
+        path: 'professors',
         component: ProfessorsComponent
       },
-      { 
-        path: 'history', 
+      {
+        path: 'history',
         component: HistoryComponent
       },
-      { 
-        path: 'books', 
+      {
+        path: 'configs',
+        component: ConfigsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'rules',
+            pathMatch: 'full'
+          },
+          {
+            path: 'rules',
+            component: RulesComponent
+          }
+        ]
+      },
+      {
+        path: 'books',
         component: BooksComponent,
         children: [
           {
@@ -72,7 +89,7 @@ const routes: Routes = [
           }
         ]
       }
-    ] 
+    ]
   }
 ];
 

@@ -10,6 +10,9 @@ import { AddComponent } from './add/add.component';
 import { HistoryComponent } from '../history/history.component';
 import { BooksComponent } from '../books/books.component';
 import { BorrowComponent } from './borrow/borrow.component';
+import { DeleteRestoreComponent } from './delete-restore/delete-restore.component';
+import { ConfigsComponent } from '../configs/configs.component';
+import { RulesComponent } from '../configs/rules/rules.component';
 
 
 const routes: Routes = [
@@ -51,6 +54,10 @@ const routes: Routes = [
           {
             path: 'borrow/:id',
             component: BorrowComponent
+          },
+          {
+            path: 'delete-restore',
+            component: DeleteRestoreComponent
           }
         ]
       },
@@ -65,6 +72,21 @@ const routes: Routes = [
       {
         path: 'books',
         component: BooksComponent
+      },
+      {
+        path: 'configs',
+        component: ConfigsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'rules',
+            pathMatch: 'full'
+          },
+          {
+            path: 'rules',
+            component: RulesComponent
+          }
+        ]
       }
     ]
   }
